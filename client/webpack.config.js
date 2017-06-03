@@ -1,14 +1,12 @@
 const path = require('path');
 
-const publicPath = path.resolve(__dirname, '../server/public');
-
 const config = {
     context: __dirname,
     entry: [
         './src/index',
     ],
     output: {
-        path: publicPath,
+        path: path.resolve(__dirname, '../server/public/build'),
         filename: 'bundle.js',
     },
     resolve: {
