@@ -5,10 +5,15 @@ const config = {
     entry: [
         './src/index',
     ],
+
     output: {
         path: path.resolve(__dirname, '../server/public/build'),
         filename: 'bundle.js',
     },
+    devServer: {
+        publicPath: '/build/',
+    },
+
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
     },

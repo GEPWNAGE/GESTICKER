@@ -6,22 +6,11 @@ use Slim\Http\Response;
 
 class App {
 
-    protected $config = [
-        'container' => [
-            'settings' => [
-                'displayErrorDetails' => true,
-            ],
-        ],
-
-        'view' => [
-            // TODO: Set cache path in production env
-            'cache' => false,
-        ],
-    ];
-
+    protected $config;
     protected $app;
 
     function __construct() {
+        $this->config = Config::create('development');
         $container = new \Slim\Container($this->config['container']);
         $this->app = new \Slim\App($container);
 
@@ -47,12 +36,11 @@ class App {
 
     protected function applyRoutes() {
         $app = $this->app;
+        $config = $this->config;
 
-        $app->get('/', function (Request $request, Response $response) {
+        $app->get('/', function (Request $request, Response $response) use ($config) {
             return $this->view->render($response, 'index.twig', [
-                'assets' => [
-                    'script' => '/build/bundle.js',
-                ],
+                'assets' => $config['assets'],
             ]);
         });
     }
