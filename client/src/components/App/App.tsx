@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SFC } from 'react';
 
 import { Sticker } from '../../types';
+import Header from '../Header/Header';
 import Map from '../Map/Map';
 
 import * as styles from './App.scss';
@@ -12,7 +13,12 @@ const stickers: Sticker[] = [
 
 const App: SFC<{}> = () => (
     <div className={styles.app}>
-        <Map stickers={stickers} />
+        <div className={styles.header}>
+            <Header />
+        </div>
+        <div className={styles.map}>
+            <Map stickers={stickers} />
+        </div>
     </div>
 );
 

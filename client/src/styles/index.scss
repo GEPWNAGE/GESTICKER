@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+html {
+    font: 16px Roboto, sans-serif;
+}
+
 html,
 body,
 :global(#app) {
