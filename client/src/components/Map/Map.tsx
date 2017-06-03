@@ -2,9 +2,16 @@ import * as React from 'react';
 import { SFC } from 'react';
 import GoogleMapReact from 'google-map-react';
 
+import { Sticker } from '../../types';
+import StickerMarker from '../StickerMarker/StickerMarker';
+
 import * as styles from './Map.scss';
 
-const Map: SFC<{}> = () => (
+interface MapProps {
+    stickers: Sticker[];
+}
+
+const Map: SFC<MapProps> = ({ stickers }) => (
     <div className={styles.container}>
         <GoogleMapReact
             bootstrapURLKeys={{
@@ -14,7 +21,12 @@ const Map: SFC<{}> = () => (
             }}
             defaultCenter={{ lat: 51.4473811, lng: 5.4877141 }}
             defaultZoom={17}
-        />
+            onChildClick={(...params: any[]) => console.log('clicked!', params)}
+        >
+            {stickers.map((sticker) => (
+                <StickerMarker lat={sticker.lat} lng={sticker.lng} />
+            ))}
+        </GoogleMapReact>
     </div>
 );
 
