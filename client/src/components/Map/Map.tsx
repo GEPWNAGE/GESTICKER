@@ -24,7 +24,12 @@ const Map: SFC<MapProps> = ({ stickers }) => (
             onChildClick={(...params: any[]) => console.log('clicked!', params)}
         >
             {stickers.map((sticker) => (
-                <StickerMarker lat={sticker.lat} lng={sticker.lng} />
+                <StickerMarker
+                    key={sticker.id}
+                    lat={sticker.lat}
+                    lng={sticker.lng}
+                    sticker={sticker}
+                />
             ))}
         </GoogleMapReact>
     </div>
