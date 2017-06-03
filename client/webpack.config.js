@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const config = {
     context: __dirname,
@@ -44,6 +45,12 @@ const config = {
             },
         ],
     },
+
+    plugins: [
+        new webpack.WatchIgnorePlugin([
+            /scss\.d\.ts$/,
+        ]),
+    ],
 };
 
 module.exports = config;
