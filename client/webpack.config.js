@@ -4,6 +4,8 @@ const webpack = require('webpack');
 const config = {
     context: __dirname,
     entry: [
+        'react-hot-loader/patch',
+        'webpack-dev-server/client?http://localhost:8080',
         './src/index',
     ],
 
@@ -12,8 +14,13 @@ const config = {
         filename: 'bundle.js',
     },
     devServer: {
-        publicPath: '/build/',
+        host: 'localhost',
+        port: 8080,
+        hot: true,
+        publicPath: 'http://localhost:8080/build/',
+        headers: { 'Access-Control-Allow-Origin': '*' },
     },
+    devtool: 'source-map',
 
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -51,6 +58,9 @@ const config = {
         new webpack.WatchIgnorePlugin([
             /scss\.d\.ts$/,
         ]),
+
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
     ],
 };
 
