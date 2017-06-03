@@ -10,8 +10,8 @@ type StickerMarkerProps = ChildComponentProps & {
     sticker: Sticker;
 };
 
-const StickerMarker: SFC<StickerMarkerProps> = ({ sticker }) => (
-    <div className={styles.marker}>
+const StickerMarker: SFC<StickerMarkerProps> = ({ sticker, $hover }) => (
+    <div className={$hover ? styles.markerHover : styles.marker}>
         {sticker.id}
     </div>
 );
