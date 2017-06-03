@@ -37,6 +37,7 @@ const config = {
                         options: {
                             namedExport: true,
                             modules: true,
+                            localIdentName: '[name]__[local]--[hash:base64:5]',
                             importLoaders: 1,
                         },
                     },
