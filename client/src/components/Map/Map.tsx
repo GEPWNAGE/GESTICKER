@@ -2,8 +2,10 @@ import * as React from 'react';
 import { SFC } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const App: SFC<{}> = () => (
-    <div style={{ width: 400, height: 400 }}>
+import * as styles from './Map.scss';
+
+const Map: SFC<{}> = () => (
+    <div className={styles.container}>
         <GoogleMapReact
             bootstrapURLKeys={{
                 // TODO: Restrict Google Maps API key
@@ -16,4 +18,4 @@ const App: SFC<{}> = () => (
     </div>
 );
 
-export default App;
+export default Map;

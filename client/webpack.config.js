@@ -26,6 +26,22 @@ const config = {
                     { loader: 'awesome-typescript-loader' },
                 ],
             },
+
+            {
+                test: /\.scss$/,
+                use: [
+                    { loader: 'style-loader' },
+                    {
+                        loader: 'typings-for-css-modules-loader',
+                        options: {
+                            namedExport: true,
+                            modules: true,
+                            importLoaders: 1,
+                        },
+                    },
+                    { loader: 'sass-loader' },
+                ],
+            },
         ],
     },
 };
