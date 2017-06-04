@@ -47,7 +47,7 @@ const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType, date
 
         <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Date</div>
-            <div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>
+            {/*<div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>*/}
             <DatePicker
                 value={date}
                 onChange={setDate}
@@ -56,7 +56,7 @@ const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType, date
 
         <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Location</div>
-            <div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>
+            {/*<div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>*/}
             <LocationPicker coords={coords} onChange={setCoords} />
         </div>
 

@@ -2,15 +2,18 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
-import App from './components/App/App';
+import App, { AppContainerProps } from './containers/App';
+import configureStore from './redux/store';
 
 import './styles/index.scss';
 
+const store = configureStore();
+
 const app = document.getElementById('app');
-function render(AppComponent: React.ComponentType<{}>) {
+function render(AppComponent: React.ComponentType<AppContainerProps>) {
     ReactDOM.render((
         <AppContainer>
-            <AppComponent />
+            <AppComponent store={store} />
         </AppContainer>
     ), app);
 }
