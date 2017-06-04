@@ -1,6 +1,6 @@
+import { ChildComponentProps } from 'google-map-react';
 import * as React from 'react';
 import { SFC } from 'react';
-import { ChildComponentProps } from 'google-map-react';
 
 import { Sticker } from '../../types';
 

@@ -1,7 +1,7 @@
+import GoogleMapReact, { Maps, Options } from 'google-map-react';
 import * as React from 'react';
 import { SFC } from 'react';
 import { pure } from 'recompose';
-import GoogleMapReact, { Maps, Options } from 'google-map-react';
 
 import { Sticker } from '../../types';
 import StickerMarker from '../StickerMarker/StickerMarker';

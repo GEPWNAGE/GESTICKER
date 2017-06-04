@@ -9,7 +9,7 @@ import Map from '../Map/Map';
 import * as styles from './App.scss';
 
 const stickers: Sticker[] = [
-    { id: 1, lat: 51.4473811, lng: 5.4877141 }
+    { id: 1, lat: 51.4473811, lng: 5.4877141 },
 ];
 
 const App: SFC<{}> = () => (
