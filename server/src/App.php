@@ -38,7 +38,7 @@ class App {
         $app = $this->app;
         $config = $this->config;
 
-        $app->get('/', function (Request $request, Response $response) use ($config) {
+        $app->get('[/{path:.*}]', function (Request $request, Response $response) use ($config) {
             return $this->view->render($response, 'index.twig', [
                 'assets' => $config['assets'],
             ]);
