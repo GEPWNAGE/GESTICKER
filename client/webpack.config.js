@@ -18,6 +18,7 @@ const config = {
         host: 'localhost',
         port: 8080,
         hot: true,
+        overlay: true,
         publicPath: 'http://localhost:8080/build/',
         headers: { 'Access-Control-Allow-Origin': '*' },
     },
