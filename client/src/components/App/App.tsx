@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { SFC } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Sticker } from '../../types';
 import Header from '../Header/Header';
@@ -12,14 +13,16 @@ const stickers: Sticker[] = [
 ];
 
 const App: SFC<{}> = () => (
-    <div className={styles.app}>
-        <div className={styles.header}>
-            <Header />
+    <Router>
+        <div className={styles.app}>
+            <div className={styles.header}>
+                <Header />
+            </div>
+            <div className={styles.map}>
+                <Map stickers={stickers} />
+            </div>
         </div>
-        <div className={styles.map}>
-            <Map stickers={stickers} />
-        </div>
-    </div>
+    </Router>
 );
 
 export default App;
