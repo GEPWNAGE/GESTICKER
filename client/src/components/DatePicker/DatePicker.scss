@@ -18,3 +18,61 @@
         border-color: $color-primary;
     }
 }
+
+:global .react-datepicker {
+    font-family: inherit;
+    font-size: 0.8rem;
+
+    border: 2px solid mix(white, $color-header, 85%);
+    border-radius: $border-radius;
+
+    &__tether-element-attached-top .react-datepicker__triangle {
+        top: 1px;
+        border-bottom-color: mix(white, $color-header, 95%);
+
+        &::before {
+            top: -3px;
+            border-bottom-color: mix(white, $color-header, 85%);
+        }
+    }
+
+    &__header {
+        background: mix(white, $color-header, 95%);
+        border-bottom: 0;
+        border-radius: 0;
+    }
+
+    &__day {
+        &:hover {
+            background-color: mix(white, $color-header, 90%);
+        }
+
+        &--today {
+            color: $color-primary;
+            font-weight: inherit;
+        }
+
+        &--keyboard-selected {
+            background-color: transparent;
+            box-shadow: inset 0 0 0 2px $color-primary;
+            color: $color-primary;
+
+            &:hover {
+                background-color: rgba($color-header, 0.1);
+            }
+        }
+
+        &--selected,
+        &--in-selecting-range,
+        &--in-range {
+            border-radius: $border-radius;
+            background-color: $color-primary;
+            color: white;
+
+            &:hover {
+                opacity: 0.9;
+                background-color: $color-primary;
+            }
+        }
+    }
+}
