@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { SFC } from 'react';
+import { pure } from 'recompose';
 import GoogleMapReact, { Maps, Options } from 'google-map-react';
 
 import { Sticker } from '../../types';
@@ -42,4 +43,4 @@ const Map: SFC<MapProps> = ({ stickers }) => (
     </div>
 );
 
-export default Map;
+export default pure(Map);
