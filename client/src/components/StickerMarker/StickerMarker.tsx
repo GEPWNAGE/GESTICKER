@@ -7,12 +7,12 @@ import { Sticker } from '../../types';
 import * as styles from './StickerMarker.scss';
 
 type StickerMarkerProps = ChildComponentProps & {
-    sticker: Sticker;
+    sticker?: Sticker;
 };
 
 const StickerMarker: SFC<StickerMarkerProps> = ({ sticker, $hover }) => (
     <div className={$hover ? styles.markerHover : styles.marker}>
-        {sticker.id}
+        {sticker && sticker.id}
     </div>
 );
 

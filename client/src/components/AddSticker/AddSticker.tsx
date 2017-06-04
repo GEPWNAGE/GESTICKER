@@ -1,3 +1,4 @@
+import { Coords } from 'google-map-react';
 import { Moment } from 'moment';
 import * as React from 'react';
 import { SFC } from 'react';
@@ -16,9 +17,11 @@ interface AddStickerProps {
     setType: (type: string) => void;
     date: Moment;
     setDate: (date: Moment) => void;
+    coords: Coords;
+    setCoords: (coords: Coords) => void;
 }
 
-const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType, date, setDate }) => (
+const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType, date, setDate, coords, setCoords }) => (
     <div className={styles.container}>
         <h2 className={styles.heading}>Add sticker</h2>
 
@@ -54,7 +57,7 @@ const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType, date
         <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Location</div>
             <div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>
-            <LocationPicker />
+            <LocationPicker coords={coords} onChange={setCoords} />
         </div>
 
         <button>Add sticker</button>
