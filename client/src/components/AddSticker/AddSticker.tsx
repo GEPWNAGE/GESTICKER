@@ -1,6 +1,8 @@
+import { Moment } from 'moment';
 import * as React from 'react';
 import { SFC } from 'react';
 
+import DatePicker from '../DatePicker/DatePicker';
 import ImageDropzone from '../ImageDropzone/ImageDropzone';
 import LocationPicker from '../LocationPicker/LocationPicker';
 import RadioSelect from '../RadioSelect/RadioSelect';
@@ -12,17 +14,22 @@ interface AddStickerProps {
     setImage: (image: File) => void;
     type: 'placed' | 'spotted';
     setType: (type: string) => void;
+    date: Moment;
+    setDate: (date: Moment) => void;
 }
 
-const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType }) => (
+const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType, date, setDate }) => (
     <div className={styles.container}>
-        <h2>Add sticker</h2>
+        <h2 className={styles.heading}>Add sticker</h2>
 
         <div className={styles.row}>
-            <ImageDropzone image={image} onChange={setImage} />
+            <ImageDropzone
+                image={image}
+                onChange={setImage}
+            />
         </div>
 
-        <div className={styles.row}>
+        <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Did you place or spot this sticker?</div>
             <div className={styles.rowSubHeading}>Inb4 yes</div>
             <RadioSelect
@@ -35,13 +42,16 @@ const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType }) =>
             />
         </div>
 
-        <div className={styles.row}>
+        <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Date</div>
             <div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>
-            <input type="text" />
+            <DatePicker
+                value={date}
+                onChange={setDate}
+            />
         </div>
 
-        <div className={styles.row}>
+        <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Location</div>
             <div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>
             <LocationPicker />

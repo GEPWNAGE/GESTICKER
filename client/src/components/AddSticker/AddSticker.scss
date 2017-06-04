@@ -8,8 +8,25 @@
     max-width: 600px;
 }
 
+.heading {
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
 .row {
     margin-bottom: $spacing-base * 2;
+
+    transition:
+        opacity $transition-duration ease,
+        filter $transition-duration ease;
+}
+
+.rowDisabled {
+    composes: row;
+
+    pointer-events: none;
+    opacity: 0.5;
+    filter: grayscale(100%);
 }
 
 .rowHeading {

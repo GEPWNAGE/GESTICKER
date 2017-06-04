@@ -5,6 +5,7 @@
 html {
     font: 500 16px Quicksand, sans-serif;
     color: $color-text;
+    user-select: none;
 }
 
 html,
