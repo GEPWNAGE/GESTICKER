@@ -1,5 +1,12 @@
+@import '../../styles/variables';
+
 .header {
-    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: $header-height;
+    padding: 0 $spacing-base;
+
     background: rgba(#2B303A, 0.8);
 }
 

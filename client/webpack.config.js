@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 
 const config = {
     context: __dirname,
@@ -51,6 +52,24 @@ const config = {
             },
 
             {
+                test: /\.jsx?$/,
+                include: /node_modules.react-icons/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                'react',
+                            ],
+                            plugins: [
+                                'react-hot-loader/babel',
+                            ],
+                        },
+                    },
+                ],
+            },
+
+            {
                 test: /\.scss$/,
                 use: [
                     { loader: 'style-loader' },
@@ -70,6 +89,8 @@ const config = {
     },
 
     plugins: [
+        new CheckerPlugin(),
+
         new webpack.WatchIgnorePlugin([
             /scss\.d\.ts$/,
         ]),

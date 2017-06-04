@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Dropzone from 'react-dropzone';
+import MdFileUpload from 'react-icons/md/file-upload';
 
 import { getUsefulImageData } from '../../helpers/exif';
 
@@ -18,6 +19,7 @@ export default class ImageDropzone extends React.Component<ImageDropzoneProps, {
         return (
             <Dropzone
                 className={styles.dropzone}
+                activeClassName={styles.dropzoneHover}
                 multiple={false}
                 onDropAccepted={this.handleDropAccepted}
             >
@@ -28,7 +30,14 @@ export default class ImageDropzone extends React.Component<ImageDropzoneProps, {
                         style={{ backgroundImage: `url(${image.preview})`}}
                     />
                 ) : (
-                    <div>Drop image here</div>
+                    <div className={styles.placeholder}>
+                        <div className={styles.placeholderIcon}>
+                            <MdFileUpload />
+                        </div>
+                        <div className={styles.placeholderText}>
+                            Drag image here to upload
+                        </div>
+                    </div>
                 )}
             </Dropzone>
         );

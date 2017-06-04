@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand:400');
+@import './variables';
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500');
 
 html {
-    font: 16px Quicksand, sans-serif;
+    font: 500 16px Quicksand, sans-serif;
+    color: $color-text;
 }
 
 html,

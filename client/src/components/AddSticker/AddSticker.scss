@@ -1,5 +1,9 @@
+@import '../../styles/variables';
+
 .container {
     display: flex;
     flex-direction: column;
-    padding: 6rem 1rem 1rem;
+    padding: ($header-height + $spacing-base) $spacing-base $spacing-base;
+    margin: 0 auto;
+    max-width: 800px;
 }

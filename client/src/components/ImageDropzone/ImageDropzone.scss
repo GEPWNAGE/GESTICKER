@@ -1,14 +1,51 @@
+@import '../../styles/variables';
+
 .dropzone {
     display: flex;
+    flex-direction: column;
     min-height: 200px;
     overflow: hidden;
 
-    background: #EEEEEE;
-    border-radius: 5px;
+    box-shadow: inset 0 0 0 2px rgba($color-header, 0.15);
+    border-radius: $border-radius;
+    cursor: pointer;
+
+    transition: box-shadow $transition-duration ease;
+}
+
+.dropzone:hover,
+.dropzoneHover {
+    box-shadow: inset 0 0 0 2px $color-primary;
 }
 
 .preview {
-    flex: 0 0 100%;
+    flex: 1 0 auto;
 
     background-size: cover;
+}
+
+.placeholder {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: rgba($color-text, 0.55);
+
+    transition: color $transition-duration ease;
+
+    .dropzone:hover &,
+    .dropzoneHover & {
+        color: $color-primary;
+    }
+}
+
+.placeholderIcon {
+    margin-bottom: 0.5rem;
+    font-size: 3rem;
+}
+
+.placeholderText {
+    font-size: 1.15rem;
 }
