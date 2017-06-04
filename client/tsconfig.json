@@ -4,6 +4,7 @@
     "module": "es2015",
     "moduleResolution": "node",
     "jsx": "preserve",
+    "lib": ["es5", "dom", "es2015.promise"],
     "noImplicitAny": true
   },
   "include": [

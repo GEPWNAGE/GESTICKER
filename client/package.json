@@ -11,9 +11,11 @@
     "lint": "tslint \"src/**/!(*.scss.d.ts|!(*.{ts,tsx}))\""
   },
   "dependencies": {
+    "exif-parser": "^0.1.9",
     "google-map-react": "^0.24.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-dropzone": "^3.13.2",
     "react-hot-loader": "next",
     "react-router-dom": "^4.1.1",
     "recompose": "^0.23.4"
@@ -22,6 +24,7 @@
     "@types/google-map-react": "^0.22.3",
     "@types/react": "^15.0.26",
     "@types/react-dom": "^15.5.0",
+    "@types/react-dropzone": "^0.0.32",
     "@types/react-hot-loader": "next",
     "@types/react-router-dom": "^4.0.4",
     "@types/recompose": "^0.23.0",
