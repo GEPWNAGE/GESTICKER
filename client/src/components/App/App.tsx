@@ -2,8 +2,8 @@ import * as React from 'react';
 import { SFC } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import AddSticker from '../../containers/AddSticker';
 import { Sticker } from '../../types';
-import AddSticker from '../AddSticker/AddSticker';
 import Header from '../Header/Header';
 import Map from '../Map/Map';
 
