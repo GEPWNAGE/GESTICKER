@@ -3,7 +3,7 @@
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "preserve",
     "noImplicitAny": true
   },
   "include": [

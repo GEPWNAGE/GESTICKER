@@ -12,6 +12,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, '../server/public/build'),
         filename: 'bundle.js',
+        publicPath: '/build/',
     },
     devServer: {
         host: 'localhost',
@@ -31,7 +32,20 @@ const config = {
             {
                 test: /\.tsx?$/,
                 use: [
-                    { loader: 'awesome-typescript-loader' },
+                    {
+                        loader: 'awesome-typescript-loader',
+                        options: {
+                            useBabel: true,
+                            babelOptions: {
+                                presets: [
+                                    'react',
+                                ],
+                                plugins: [
+                                    'react-hot-loader/babel',
+                                ],
+                            },
+                        },
+                    },
                 ],
             },
 
