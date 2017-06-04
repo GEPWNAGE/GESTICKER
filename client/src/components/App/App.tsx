@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { SFC } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { Sticker } from '../../types';
+import AddSticker from '../AddSticker/AddSticker';
 import Header from '../Header/Header';
 import Map from '../Map/Map';
 
@@ -18,9 +19,8 @@ const App: SFC<{}> = () => (
             <div className={styles.header}>
                 <Header />
             </div>
-            <div className={styles.map}>
-                <Map stickers={stickers} />
-            </div>
+            <Route exact path="/" render={() => <Map stickers={stickers} />} />
+            <Route path="/add-sticker" render={() => <AddSticker />}/>
         </div>
     </Router>
 );
