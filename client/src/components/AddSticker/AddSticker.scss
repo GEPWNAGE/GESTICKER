@@ -5,5 +5,21 @@
     flex-direction: column;
     padding: ($header-height + $spacing-base) $spacing-base $spacing-base;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 600px;
+}
+
+.row {
+    margin-bottom: $spacing-base * 2;
+}
+
+.rowHeading {
+    margin-bottom: $spacing-base;
+}
+
+.rowSubHeading {
+    margin-top: $spacing-base * -0.75;
+    margin-bottom: $spacing-base;
+
+    color: rgba($color-text, 0.5);
+    font-size: 0.9rem;
 }

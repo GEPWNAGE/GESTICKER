@@ -1,0 +1,73 @@
+@import '../../styles/variables';
+
+.select {
+    display: flex;
+    flex-direction: row;
+}
+
+.option {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 20px 15px 15px;
+    margin-right: $spacing-base;
+
+    line-height: 1em;
+    background: rgba($color-header, 0.05);
+    border-radius: $border-radius;
+    cursor: pointer;
+
+    transition:
+        background $transition-duration ease,
+        color $transition-duration ease;
+
+    &:hover {
+        background: rgba($color-header, 0.15);
+    }
+}
+
+.optionChecked {
+    composes: option;
+
+    &,
+    &:hover {
+        color: white;
+        background: $color-primary;
+    }
+}
+
+.icon {
+    display: flex;
+    width: 1em;
+    height: 1em;
+    margin-right: 10px;
+
+    border-radius: 50%;
+    border: 2px solid;
+    opacity: 0.8;
+
+    &::before {
+        content: '';
+        flex: 1 0 auto;
+        margin: 2px;
+
+        border-radius: 50%;
+        background: currentColor;
+        opacity: 0;
+        transform: scale(0);
+
+        transition:
+            opacity $transition-duration ease,
+            transform $transition-duration ease;
+    }
+}
+
+.iconChecked {
+    composes: icon;
+
+    opacity: 1;
+
+    &::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

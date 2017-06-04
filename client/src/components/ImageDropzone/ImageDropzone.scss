@@ -22,6 +22,12 @@
     flex: 1 0 auto;
 
     background-size: cover;
+    transition: opacity $transition-duration ease;
+
+    .dropzone:hover &,
+    .dropzoneHover & {
+        opacity: 0.9;
+    }
 }
 
 .placeholder {
