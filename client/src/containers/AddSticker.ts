@@ -18,4 +18,4 @@ const mapDispatchToProps = {
     setCoords,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddSticker);
+export default connect<any, any, any>(mapStateToProps, mapDispatchToProps)(AddSticker);
