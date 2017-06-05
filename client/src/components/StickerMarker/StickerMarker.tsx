@@ -11,9 +11,7 @@ type StickerMarkerProps = ChildComponentProps & {
 };
 
 const StickerMarker: SFC<StickerMarkerProps> = ({ sticker, $hover }) => (
-    <div className={$hover ? styles.markerHover : styles.marker}>
-        {sticker && sticker.id}
-    </div>
+    <div className={$hover ? styles.markerHover : styles.marker} />
 );
 
 export default StickerMarker;

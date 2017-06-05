@@ -13,7 +13,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, '../server/public/build'),
         filename: 'bundle.js',
-        publicPath: '/build/',
+        publicPath: 'http://localhost:8080/build/',
     },
     devServer: {
         host: 'localhost',
@@ -83,6 +83,13 @@ const config = {
                         },
                     },
                     { loader: 'sass-loader' },
+                ],
+            },
+
+            {
+                test: /\.{jpg|svg|png|gif}$/,
+                use: [
+                    { loader: 'file-loader' },
                 ],
             },
         ],
