@@ -16,6 +16,7 @@ const DatePicker: SFC<DatePickerProps> = ({ value, onChange }) => (
         selected={value}
         onChange={onChange}
         className={styles.input}
+        dateFormat="LL"
     />
 );
 
