@@ -13,6 +13,14 @@ const stickers: Sticker[] = [
     { id: 1, lat: 51.4473811, lng: 5.4877141 },
 ];
 
+for (let i = 0; i < 100; i++) {
+    stickers.push({
+        id: i + 2,
+        lat: 51.4473811 + (1 - Math.random() * 2) * 0.05,
+        lng: 5.4877141 + (1 - Math.random() * 2) * 0.1,
+    });
+}
+
 const App: SFC<{}> = () => (
     <Router>
         <div className={styles.app}>
