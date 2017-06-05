@@ -45,14 +45,6 @@ export default class ImageDropzone extends React.Component<ImageDropzoneProps, {
 
     protected handleDropAccepted = async (files: File[]) => {
         const file = files[0];
-        let data;
-        try {
-            data = await getUsefulImageData(file);
-        } catch (e) {
-            data = null;
-        }
-
-        console.log(data);
         this.props.onChange(file);
     }
 
