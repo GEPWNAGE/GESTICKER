@@ -12,7 +12,7 @@
     margin-right: $spacing-base;
 
     line-height: 1em;
-    background: rgba($color-header, 0.05);
+    background: rgba($color-text, 0.05);
     border-radius: $border-radius;
     cursor: pointer;
 
@@ -21,7 +21,7 @@
         color $transition-duration ease;
 
     &:hover {
-        background: rgba($color-header, 0.15);
+        background: rgba($color-text, 0.15);
     }
 }
 

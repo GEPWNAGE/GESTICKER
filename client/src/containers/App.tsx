@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SFC } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Store } from 'redux';
 
 import App from '../components/App/App';
@@ -12,7 +13,9 @@ export interface AppContainerProps {
 
 const AppContainer: SFC<AppContainerProps> = ({ store }) => (
     <ReduxProvider store={store}>
-        <App />
+        <Router>
+            <App />
+        </Router>
     </ReduxProvider>
 );
 

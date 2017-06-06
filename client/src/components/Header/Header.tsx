@@ -1,14 +1,20 @@
 import * as React from 'react';
 import { SFC } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import * as styles from './Header.scss';
 
-const Header: SFC<{}> = () => (
-    <div className={styles.header}>
-        <Link to="/"><h1 className={styles.logo}>GESTICKER</h1></Link>
-        <Link to="/add-sticker">Add sticker</Link>
+type HeaderProps = RouteComponentProps<{}>;
+
+const Header: SFC<HeaderProps> = ({ location }) => (
+    <div className={location.pathname === '/' ? styles.headerOverlay : styles.header}>
+        <NavLink to="/" exact className={styles.link} activeClassName={styles.linkActive}>
+            <h1 className={styles.logo}>GESTICKER</h1>
+        </NavLink>
+        <NavLink to="/add-sticker" className={styles.link} activeClassName={styles.linkActive}>
+            Add sticker
+        </NavLink>
     </div>
 );
 
-export default Header;
+export default withRouter<{}>(Header);

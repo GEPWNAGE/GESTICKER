@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SFC } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import AddSticker from '../../containers/AddSticker';
 import { Sticker } from '../../types';
@@ -22,15 +22,13 @@ for (let i = 0; i < 100; i++) {
 }
 
 const App: SFC<{}> = () => (
-    <Router>
-        <div className={styles.app}>
-            <div className={styles.header}>
-                <Header />
-            </div>
-            <Route exact path="/" render={() => <Map stickers={stickers} />} />
-            <Route path="/add-sticker" render={() => <AddSticker />}/>
+    <div className={styles.app}>
+        <div className={styles.header}>
+            <Header />
         </div>
-    </Router>
+        <Route exact path="/" render={() => <Map stickers={stickers} />} />
+        <Route path="/add-sticker" render={() => <AddSticker />}/>
+    </div>
 );
 
 export default App;
