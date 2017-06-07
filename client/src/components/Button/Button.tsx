@@ -4,12 +4,12 @@ import { SFC } from 'react';
 
 import * as styles from './Button.scss';
 
-interface ButtonProps {
+type ButtonProps = React.DOMAttributes<HTMLButtonElement> & {
     primary?: boolean;
-}
+};
 
-const Button: SFC<ButtonProps> = ({ primary, children }) => (
-    <button className={classNames(styles.button, primary && styles.primary)}>
+const Button: SFC<ButtonProps> = ({ primary, children, ...otherProps }) => (
+    <button className={classNames(styles.button, primary && styles.primary)} {...otherProps}>
         {children}
     </button>
 );

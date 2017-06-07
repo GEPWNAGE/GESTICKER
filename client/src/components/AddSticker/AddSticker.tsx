@@ -22,6 +22,7 @@ interface AddStickerProps {
     setCoords: (coords: Coords) => void;
     mapCenter: Coords;
     setMapCenter: (center: Coords) => void;
+    submitForm: () => void;
 }
 
 const AddSticker: SFC<AddStickerProps> = ({
@@ -35,6 +36,7 @@ const AddSticker: SFC<AddStickerProps> = ({
     setCoords,
     mapCenter,
     setMapCenter,
+    submitForm,
 }) => (
     <div className={styles.container}>
         <h2 className={styles.heading}>Add sticker</h2>
@@ -80,7 +82,7 @@ const AddSticker: SFC<AddStickerProps> = ({
         </div>
 
         <div className={image ? styles.row : styles.rowDisabled}>
-            <Button primary>Add sticker</Button>
+            <Button primary onClick={submitForm}>Add sticker</Button>
         </div>
     </div>
 );

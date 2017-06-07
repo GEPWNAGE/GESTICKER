@@ -46,10 +46,9 @@ class App {
                 ]);
             });
 
-            // TODO: Make this a POST method
-            $this->get('/stickers/create', function (Request $request, Response $response) {
+            $this->post('/stickers', function (Request $request, Response $response) {
                 return $response->withJson([
-                    'sticker' => Database::createSticker(),
+                    'sticker' => Database::createStickerFromRequest($request),
                 ]);
             });
 

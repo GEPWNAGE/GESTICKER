@@ -3,6 +3,7 @@ namespace Gesticker;
 
 use Gesticker\Entity\Image;
 use Gesticker\Entity\Sticker;
+use Slim\Http\Request;
 use Spot\Locator;
 
 class Database {
@@ -49,6 +50,22 @@ class Database {
             'date' => new \DateTime(),
             'lat' => 51.4473811 + (mt_rand(0, mt_getrandmax() - 1) / mt_getrandmax() * 2) - 1,
             'lng' => 5.4877141 + (mt_rand(0, mt_getrandmax() - 1) / mt_getrandmax() * 2) - 1,
+        ]);
+
+        return $sticker;
+    }
+
+    public static function createStickerFromRequest(Request $request) {
+        $body = $request->getParsedBody();
+
+        // TODO: Validate
+        // TODO: Save uploaded image: $request->getUploadedFiles();
+
+        $sticker = self::$stickers->create([
+            'type' => $body['type'],
+            'date' => new \DateTime($body['date']),
+            'lat' => $body['lat'],
+            'lng' => $body['lng'],
         ]);
 
         return $sticker;

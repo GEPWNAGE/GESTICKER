@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import AddSticker from '../components/AddSticker/AddSticker';
-import { setCoords, setDate, setImage, setMapCenter, setType } from '../redux/add-sticker/actions';
+import { setCoords, setDate, setImage, setMapCenter, setType, submitForm } from '../redux/add-sticker/actions';
 import { State } from '../redux/reducers';
 
 const mapStateToProps = (state: State) => ({
@@ -18,6 +18,7 @@ const mapDispatchToProps = {
     setDate,
     setCoords,
     setMapCenter,
+    submitForm,
 };
 
 export default connect<any, any, any>(mapStateToProps, mapDispatchToProps)(AddSticker);
