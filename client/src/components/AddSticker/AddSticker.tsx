@@ -3,6 +3,7 @@ import { Moment } from 'moment';
 import * as React from 'react';
 import { SFC } from 'react';
 
+import Button from '../Button/Button';
 import DatePicker from '../DatePicker/DatePicker';
 import ImageDropzone from '../ImageDropzone/ImageDropzone';
 import LocationPicker from '../LocationPicker/LocationPicker';
@@ -78,7 +79,9 @@ const AddSticker: SFC<AddStickerProps> = ({
             />
         </div>
 
-        <button>Add sticker</button>
+        <div className={image ? styles.row : styles.rowDisabled}>
+            <Button primary>Add sticker</Button>
+        </div>
     </div>
 );
 
