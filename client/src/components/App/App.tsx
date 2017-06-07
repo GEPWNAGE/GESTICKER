@@ -50,4 +50,4 @@ const App: SFC<AppProps> = ({ location }) => (
     </div>
 );
 
-export default withRouter(App);
+export default withRouter<any>(App);
