@@ -9,9 +9,11 @@ import * as styles from './LocationPicker.scss';
 interface LocationPickerProps {
     coords: Coords;
     onChange: (coords: Coords) => void;
+    center: Coords;
+    onChangeCenter: (center: Coords) => void;
 }
 
-const LocationPicker: SFC<LocationPickerProps> = ({ coords, onChange }) => (
+const LocationPicker: SFC<LocationPickerProps> = ({ coords, onChange, center, onChangeCenter }) => (
     <div className={styles.wrapper}>
         <GoogleMapReact
             bootstrapURLKeys={{
@@ -19,9 +21,10 @@ const LocationPicker: SFC<LocationPickerProps> = ({ coords, onChange }) => (
                 key: 'AIzaSyAU-Gj-e6WgMYQOA_dsSwX_2yHalMZ_8qU',
                 language: 'nl',
             }}
-            defaultCenter={{ lat: 51.4473811, lng: 5.4877141 }}
+            center={center}
             defaultZoom={17}
             onClick={({ lat, lng }) => onChange({ lat, lng })}
+            onChange={({ center }) => onChangeCenter(center)}
         >
             <StickerMarker {...coords} />
         </GoogleMapReact>

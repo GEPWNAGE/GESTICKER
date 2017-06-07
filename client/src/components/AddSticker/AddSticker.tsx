@@ -19,9 +19,22 @@ interface AddStickerProps {
     setDate: (date: Moment) => void;
     coords: Coords;
     setCoords: (coords: Coords) => void;
+    mapCenter: Coords;
+    setMapCenter: (center: Coords) => void;
 }
 
-const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType, date, setDate, coords, setCoords }) => (
+const AddSticker: SFC<AddStickerProps> = ({
+    image,
+    setImage,
+    type,
+    setType,
+    date,
+    setDate,
+    coords,
+    setCoords,
+    mapCenter,
+    setMapCenter,
+}) => (
     <div className={styles.container}>
         <h2 className={styles.heading}>Add sticker</h2>
 
@@ -57,7 +70,12 @@ const AddSticker: SFC<AddStickerProps> = ({ image, setImage, type, setType, date
         <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Location</div>
             {/*<div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>*/}
-            <LocationPicker coords={coords} onChange={setCoords} />
+            <LocationPicker
+                coords={coords}
+                center={mapCenter}
+                onChange={setCoords}
+                onChangeCenter={setMapCenter}
+            />
         </div>
 
         <button>Add sticker</button>
