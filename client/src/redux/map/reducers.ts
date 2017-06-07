@@ -3,11 +3,11 @@ import { Action } from 'redux';
 import { Sticker } from '../../types';
 import { SET_STICKERS } from './types';
 
-export interface StickersState {
+export interface MapState {
     stickers: Sticker[];
 }
 
-const initialState: StickersState = {
+const initialState: MapState = {
     stickers: [],
 };
 
@@ -34,7 +34,7 @@ for (let i = 0; i < 100; i++) {
     });
 }
 
-export default function stickersReducer(state: StickersState, action: Action): StickersState {
+export default function mapReducer(state: MapState, action: Action): MapState {
     if (state === undefined) {
         return initialState;
     }

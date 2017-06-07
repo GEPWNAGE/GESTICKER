@@ -1,12 +1,12 @@
 import addStickerReducer, { AddStickerState } from './add-sticker/reducers';
-import stickersReducer, { StickersState } from './stickers/reducers';
+import mapReducer, { MapState } from './map/reducers';
 
 export interface State {
     addSticker: AddStickerState;
-    stickers: StickersState;
+    map: MapState;
 }
 
 export default {
     addSticker: addStickerReducer,
-    stickers: stickersReducer,
+    map: mapReducer,
 };
