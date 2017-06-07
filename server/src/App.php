@@ -40,6 +40,19 @@ class App {
         $app = $this->app;
 
         $app->group('/api', function () {
+            $this->get('/stickers', function (Request $request, Response $response) {
+                return $response->withJson([
+                    'stickers' => Database::getStickers(),
+                ]);
+            });
+
+            // TODO: Make this a POST method
+            $this->get('/stickers/create', function (Request $request, Response $response) {
+                return $response->withJson([
+                    'sticker' => Database::createSticker(),
+                ]);
+            });
+
             // Show error for calls to non-existent API methods
             $this->get('[/{path:.*}]', function (Request $request, Response $response) {
                 return $response->withJson([
