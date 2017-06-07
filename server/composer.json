@@ -1,6 +1,6 @@
 {
     "autoload": {
-        "psr-4": { "Stickers\\": "src/" }
+        "psr-4": { "Gesticker\\": "src/" }
     },
     "require": {
         "slim/slim": "^3.0",

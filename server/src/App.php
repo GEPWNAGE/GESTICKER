@@ -1,5 +1,5 @@
 <?php
-namespace Stickers;
+namespace Gesticker;
 
 use Slim\Http\Request;
 use Slim\Http\Response;

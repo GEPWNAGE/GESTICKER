@@ -1,5 +1,5 @@
 <?php
-use Stickers\App;
+use Gesticker\App;
 
 require('../vendor/autoload.php');
 

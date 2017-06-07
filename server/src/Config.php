@@ -1,5 +1,5 @@
 <?php
-namespace Stickers;
+namespace Gesticker;
 
 class Config {
 
