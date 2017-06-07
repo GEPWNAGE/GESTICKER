@@ -18,6 +18,7 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {
+    // TODO: Not sure if this is a good idea...
     dispatch(resetForm());
 
     return bindActionCreators({
