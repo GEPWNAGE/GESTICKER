@@ -22,5 +22,5 @@ render(App);
 
 if (module.hot) {
     __webpack_public_path__ = 'http://localhost:8080/build/';
-    module.hot.accept('./components/App/App', () => render(App));
+    module.hot.accept('./containers/App', () => render(App));
 }
