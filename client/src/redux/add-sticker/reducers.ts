@@ -2,7 +2,7 @@ import { Coords } from 'google-map-react';
 import { Moment } from 'moment';
 import { Action } from 'redux';
 
-import { SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE } from './types';
+import { SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM_ERRORS } from './types';
 
 export interface AddStickerState {
     image: File;
@@ -10,6 +10,7 @@ export interface AddStickerState {
     date: Moment;
     coords: Coords;
     mapCenter: Coords;
+    errors: string[];
 }
 
 const initialState: AddStickerState = {
@@ -18,6 +19,7 @@ const initialState: AddStickerState = {
     date: null,
     coords: null,
     mapCenter: { lat: 51.4473811, lng: 5.4877141 },
+    errors: [],
 };
 
 export default function addStickerReducer(state: AddStickerState, action: Action): AddStickerState {
@@ -36,6 +38,8 @@ export default function addStickerReducer(state: AddStickerState, action: Action
             return { ...state, coords: action.payload };
         case SET_MAP_CENTER:
             return { ...state, mapCenter: action.payload };
+        case SUBMIT_FORM_ERRORS:
+            return { ...state, errors: action.payload };
         default:
             return state;
     }

@@ -33,10 +33,25 @@
     margin-bottom: $spacing-base;
 }
 
-.rowSubHeading {
+.rowError {
+    height: 1.25em;
     margin-top: $spacing-base * -0.75;
     margin-bottom: $spacing-base;
 
-    color: rgba($color-text, 0.5);
+    color: $color-error;
     font-size: 0.9rem;
+
+    transition:
+        opacity $transition-duration ease,
+        height $transition-duration ease,
+        margin $transition-duration ease;
+}
+
+.rowErrorHide {
+    composes: rowError;
+
+    height: 0;
+    margin-bottom: $spacing-base * 0.75;
+
+    opacity: 0;
 }

@@ -23,7 +23,11 @@ interface AddStickerProps {
     mapCenter: Coords;
     setMapCenter: (center: Coords) => void;
     submitForm: () => void;
+    errors: string[];
 }
+
+const errorClass = (errors: string[], field: string) =>
+    errors.indexOf(field) !== -1 ? styles.rowError : styles.rowErrorHide;
 
 const AddSticker: SFC<AddStickerProps> = ({
     image,
@@ -37,6 +41,7 @@ const AddSticker: SFC<AddStickerProps> = ({
     mapCenter,
     setMapCenter,
     submitForm,
+    errors,
 }) => (
     <div className={styles.container}>
         <h2 className={styles.heading}>Add sticker</h2>
@@ -50,7 +55,7 @@ const AddSticker: SFC<AddStickerProps> = ({
 
         <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Did you place or spot this sticker?</div>
-            <div className={styles.rowSubHeading}>Inb4 yes</div>
+            <div className={errorClass(errors, 'type')}>Just answer the damn question.</div>
             <RadioSelect
                 options={{
                     placed: <span>Placed</span>,
@@ -63,7 +68,7 @@ const AddSticker: SFC<AddStickerProps> = ({
 
         <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Date</div>
-            {/*<div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>*/}
+            <div className={errorClass(errors, 'date')}>Date is required.</div>
             <DatePicker
                 value={date}
                 onChange={setDate}
@@ -72,7 +77,7 @@ const AddSticker: SFC<AddStickerProps> = ({
 
         <div className={image ? styles.row : styles.rowDisabled}>
             <div className={styles.rowHeading}>Location</div>
-            {/*<div className={styles.rowSubHeading}>Auto-filled from EXIF data</div>*/}
+            <div className={errorClass(errors, 'location')}>Pick a location on the map.</div>
             <LocationPicker
                 coords={coords}
                 center={mapCenter}

@@ -10,6 +10,7 @@ const mapStateToProps = (state: State) => ({
     date: state.addSticker.date,
     coords: state.addSticker.coords,
     mapCenter: state.addSticker.mapCenter,
+    errors: state.addSticker.errors,
 });
 
 const mapDispatchToProps = {

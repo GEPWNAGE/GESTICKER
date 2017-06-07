@@ -6,7 +6,7 @@ import { Dispatch } from 'redux';
 import { getUsefulImageData } from '../../helpers/exif';
 import { State } from '../reducers';
 
-import { SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM } from './types';
+import { SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM_ERRORS } from './types';
 
 export const setImage = (image: File) => async (dispatch: Dispatch<State>, getState: () => State) => {
     dispatch({ type: SET_IMAGE, payload: image });
@@ -30,13 +30,33 @@ export const setCoords = (coords: Coords) => ({ type: SET_COORDS, payload: coord
 export const setMapCenter = (center: Coords) => ({ type: SET_MAP_CENTER, payload: center });
 
 export const submitForm = () => async (dispatch: Dispatch<State>, getState: () => State) => {
-    // TODO: Validate first
+    const state = getState().addSticker;
+
+    // Validation
+    const errors: string[] = [];
+
+    if (!state.type) {
+        errors.push('type');
+    }
+
+    if (!state.date) {
+        errors.push('date');
+    }
+
+    if (!state.coords) {
+        errors.push('location');
+    }
+
+    if (errors.length > 0) {
+        dispatch({ type: SUBMIT_FORM_ERRORS, payload: errors });
+        return;
+    }
+
     // TODO: Disable submit button while submitting
     // TODO: Clear form after submitting
     // TODO: Open map with added sticker
-    dispatch({ type: SUBMIT_FORM });
+    // dispatch({ type: SUBMIT_FORM });
 
-    const state = getState().addSticker;
     const data = new FormData();
     data.append('image', state.image);
     data.append('type', state.type);
