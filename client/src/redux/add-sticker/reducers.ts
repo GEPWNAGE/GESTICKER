@@ -20,7 +20,7 @@ const initialState: AddStickerState = {
     mapCenter: { lat: 51.4473811, lng: 5.4877141 },
 };
 
-export default function addStickerReducer(state: AddStickerState, action: Action) {
+export default function addStickerReducer(state: AddStickerState, action: Action): AddStickerState {
     if (state === undefined) {
         return initialState;
     }

@@ -34,8 +34,7 @@ const Map: SFC<MapProps> = ({ stickers }) => (
             {stickers.map((sticker) => (
                 <StickerMarker
                     key={sticker.id}
-                    lat={sticker.lat}
-                    lng={sticker.lng}
+                    {...sticker.coords}
                     sticker={sticker}
                 />
             ))}
