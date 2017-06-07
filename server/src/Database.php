@@ -61,7 +61,8 @@ class Database {
         // TODO: Validate
         // TODO: Save uploaded image: $request->getUploadedFiles();
 
-        $sticker = self::$stickers->create([
+        // TODO: Use `create` instead to persist sticker
+        $sticker = self::$stickers->build([
             'type' => $body['type'],
             'date' => new \DateTime($body['date']),
             'lat' => $body['lat'],
