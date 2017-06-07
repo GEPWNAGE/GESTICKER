@@ -25,6 +25,13 @@ class Config {
                     ? 'http://localhost:8080/build/bundle.js'
                     : '/build/bundle.js',
             ],
+
+            'database' => [
+                'driver' => 'pdo_sqlite',
+                'user' => '',
+                'password' => '',
+                'path' => __DIR__ . '/../data/db.sqlite',
+            ],
         ];
     }
 

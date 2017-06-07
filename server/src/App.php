@@ -6,12 +6,12 @@ use Slim\Http\Response;
 
 class App {
 
-    protected $config;
+    public static $config;
     protected $app;
 
     function __construct() {
-        $this->config = Config::create('development');
-        $container = new \Slim\Container($this->config['container']);
+        self::$config = Config::create('development');
+        $container = new \Slim\Container(self::$config['container']);
         $this->app = new \Slim\App($container);
 
         $this->configure();
@@ -24,7 +24,7 @@ class App {
         $container = $this->app->getContainer();
 
         $container['view'] = function ($container) {
-            $view = new \Slim\Views\Twig(__DIR__ . '/views', $this->config['view']);
+            $view = new \Slim\Views\Twig(__DIR__ . '/views', self::$config['view']);
 
             // Instantiate and add Slim specific extension
             $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
@@ -32,15 +32,26 @@ class App {
 
             return $view;
         };
+
+        Database::init();
     }
 
     protected function applyRoutes() {
         $app = $this->app;
-        $config = $this->config;
 
-        $app->get('[/{path:.*}]', function (Request $request, Response $response) use ($config) {
+        $app->group('/api', function () {
+            // Show error for calls to non-existent API methods
+            $this->get('[/{path:.*}]', function (Request $request, Response $response) {
+                return $response->withJson([
+                    'error' => 'method does not exist',
+                ], 400);
+            });
+        });
+
+        // Direct all requests to React entry point
+        $app->get('[/{path:.*}]', function (Request $request, Response $response) {
             return $this->view->render($response, 'index.twig', [
-                'assets' => $config['assets'],
+                'assets' => App::$config['assets'],
             ]);
         });
     }
