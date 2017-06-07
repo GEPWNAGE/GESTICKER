@@ -6,7 +6,10 @@ import { Dispatch } from 'redux';
 import { getUsefulImageData } from '../../helpers/exif';
 import { State } from '../reducers';
 
-import { SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM_ERRORS } from './types';
+import {
+    SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM, SUBMIT_FORM_ERRORS,
+    SUBMIT_FORM_SUCCESS,
+} from './types';
 
 export const setImage = (image: File) => async (dispatch: Dispatch<State>, getState: () => State) => {
     dispatch({ type: SET_IMAGE, payload: image });
@@ -30,6 +33,8 @@ export const setCoords = (coords: Coords) => ({ type: SET_COORDS, payload: coord
 export const setMapCenter = (center: Coords) => ({ type: SET_MAP_CENTER, payload: center });
 
 export const submitForm = () => async (dispatch: Dispatch<State>, getState: () => State) => {
+    dispatch({ type: SUBMIT_FORM });
+
     const state = getState().addSticker;
 
     // Validation
@@ -52,11 +57,6 @@ export const submitForm = () => async (dispatch: Dispatch<State>, getState: () =
         return;
     }
 
-    // TODO: Disable submit button while submitting
-    // TODO: Clear form after submitting
-    // TODO: Open map with added sticker
-    // dispatch({ type: SUBMIT_FORM });
-
     const data = new FormData();
     data.append('image', state.image);
     data.append('type', state.type);
@@ -68,6 +68,12 @@ export const submitForm = () => async (dispatch: Dispatch<State>, getState: () =
         method: 'POST',
         body: data,
     });
+    const result = await response.json();
 
-    console.log(response);
+    if (response.status === 200) {
+        dispatch({ type: SUBMIT_FORM_SUCCESS });
+        // TODO: Open map with added sticker
+    } else {
+        dispatch({ type: SUBMIT_FORM_ERRORS, payload: result.errors });
+    }
 };

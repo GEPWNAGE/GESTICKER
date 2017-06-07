@@ -2,7 +2,10 @@ import { Coords } from 'google-map-react';
 import { Moment } from 'moment';
 import { Action } from 'redux';
 
-import { SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM_ERRORS } from './types';
+import {
+    SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM, SUBMIT_FORM_ERRORS,
+    SUBMIT_FORM_SUCCESS,
+} from './types';
 
 export interface AddStickerState {
     image: File;
@@ -11,6 +14,7 @@ export interface AddStickerState {
     coords: Coords;
     mapCenter: Coords;
     errors: string[];
+    disableSubmit: boolean;
 }
 
 const initialState: AddStickerState = {
@@ -20,6 +24,7 @@ const initialState: AddStickerState = {
     coords: null,
     mapCenter: { lat: 51.4473811, lng: 5.4877141 },
     errors: [],
+    disableSubmit: false,
 };
 
 export default function addStickerReducer(state: AddStickerState, action: Action): AddStickerState {
@@ -28,6 +33,7 @@ export default function addStickerReducer(state: AddStickerState, action: Action
     }
 
     switch (action.type) {
+        // Set form values
         case SET_IMAGE:
             return { ...state, image: action.payload };
         case SET_TYPE:
@@ -38,8 +44,16 @@ export default function addStickerReducer(state: AddStickerState, action: Action
             return { ...state, coords: action.payload };
         case SET_MAP_CENTER:
             return { ...state, mapCenter: action.payload };
+
+        // Submit form
+        case SUBMIT_FORM:
+            return { ...state, errors: [], disableSubmit: true };
         case SUBMIT_FORM_ERRORS:
-            return { ...state, errors: action.payload };
+            return { ...state, errors: action.payload, disableSubmit: false };
+        case SUBMIT_FORM_SUCCESS:
+            return initialState;
+
+        // Default action
         default:
             return state;
     }

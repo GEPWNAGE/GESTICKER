@@ -11,6 +11,7 @@ const mapStateToProps = (state: State) => ({
     coords: state.addSticker.coords,
     mapCenter: state.addSticker.mapCenter,
     errors: state.addSticker.errors,
+    disableSubmit: state.addSticker.disableSubmit,
 });
 
 const mapDispatchToProps = {

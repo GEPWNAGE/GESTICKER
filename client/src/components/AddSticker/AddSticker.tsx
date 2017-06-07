@@ -24,6 +24,7 @@ interface AddStickerProps {
     setMapCenter: (center: Coords) => void;
     submitForm: () => void;
     errors: string[];
+    disableSubmit: boolean;
 }
 
 const errorClass = (errors: string[], field: string) =>
@@ -42,6 +43,7 @@ const AddSticker: SFC<AddStickerProps> = ({
     setMapCenter,
     submitForm,
     errors,
+    disableSubmit,
 }) => (
     <div className={styles.container}>
         <h2 className={styles.heading}>Add sticker</h2>
@@ -86,7 +88,7 @@ const AddSticker: SFC<AddStickerProps> = ({
             />
         </div>
 
-        <div className={image ? styles.row : styles.rowDisabled}>
+        <div className={(image && !disableSubmit) ? styles.row : styles.rowDisabled}>
             <Button primary onClick={submitForm}>Add sticker</Button>
         </div>
     </div>
