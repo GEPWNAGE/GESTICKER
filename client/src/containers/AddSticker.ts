@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
 
 import AddSticker from '../components/AddSticker/AddSticker';
-import { setCoords, setDate, setImage, setMapCenter, setType, submitForm } from '../redux/add-sticker/actions';
+import {
+    resetForm, setCoords, setDate, setImage, setMapCenter, setType, submitForm,
+} from '../redux/add-sticker/actions';
 import { State } from '../redux/reducers';
 
 const mapStateToProps = (state: State) => ({
@@ -14,13 +17,17 @@ const mapStateToProps = (state: State) => ({
     disableSubmit: state.addSticker.disableSubmit,
 });
 
-const mapDispatchToProps = {
-    setImage,
-    setType,
-    setDate,
-    setCoords,
-    setMapCenter,
-    submitForm,
+const mapDispatchToProps = (dispatch: Dispatch<State>) => {
+    dispatch(resetForm());
+
+    return bindActionCreators({
+        setImage,
+        setType,
+        setDate,
+        setCoords,
+        setMapCenter,
+        submitForm,
+    }, dispatch);
 };
 
 export default connect<any, any, any>(mapStateToProps, mapDispatchToProps)(AddSticker);

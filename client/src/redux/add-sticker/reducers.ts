@@ -3,8 +3,7 @@ import { Moment } from 'moment';
 import { Action } from 'redux';
 
 import {
-    SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM, SUBMIT_FORM_ERRORS,
-    SUBMIT_FORM_SUCCESS,
+    RESET_FORM, SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM, SUBMIT_FORM_ERRORS,
 } from './types';
 
 export interface AddStickerState {
@@ -33,6 +32,10 @@ export default function addStickerReducer(state: AddStickerState, action: Action
     }
 
     switch (action.type) {
+        // Reset form
+        case RESET_FORM:
+            return initialState;
+
         // Set form values
         case SET_IMAGE:
             return { ...state, image: action.payload };
@@ -50,8 +53,6 @@ export default function addStickerReducer(state: AddStickerState, action: Action
             return { ...state, errors: [], disableSubmit: true };
         case SUBMIT_FORM_ERRORS:
             return { ...state, errors: action.payload, disableSubmit: false };
-        case SUBMIT_FORM_SUCCESS:
-            return initialState;
 
         // Default action
         default:

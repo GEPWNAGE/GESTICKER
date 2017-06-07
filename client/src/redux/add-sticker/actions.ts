@@ -1,17 +1,19 @@
 import { Coords } from 'google-map-react';
 import * as moment from 'moment';
 import { Moment } from 'moment';
+import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
 
 import { getUsefulImageData } from '../../helpers/exif';
 import { State } from '../reducers';
 
 import {
-    SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM, SUBMIT_FORM_ERRORS,
-    SUBMIT_FORM_SUCCESS,
+    RESET_FORM, SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM, SUBMIT_FORM_ERRORS,
 } from './types';
 
-export const setImage = (image: File) => async (dispatch: Dispatch<State>, getState: () => State) => {
+export const resetForm = () => ({ type: RESET_FORM });
+
+export const setImage = (image: File) => async (dispatch: Dispatch<State>) => {
     dispatch({ type: SET_IMAGE, payload: image });
     try {
         // Set defaults from image EXIF data
@@ -71,8 +73,7 @@ export const submitForm = () => async (dispatch: Dispatch<State>, getState: () =
     const result = await response.json();
 
     if (response.status === 200) {
-        dispatch({ type: SUBMIT_FORM_SUCCESS });
-        // TODO: Open map with added sticker
+        dispatch(push('/'));
     } else {
         dispatch({ type: SUBMIT_FORM_ERRORS, payload: result.errors });
     }
