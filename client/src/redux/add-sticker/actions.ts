@@ -73,7 +73,7 @@ export const submitForm = () => async (dispatch: Dispatch<State>, getState: () =
     const result = await response.json();
 
     if (response.status === 200) {
-        dispatch(push('/'));
+        dispatch(push(`/${result.sticker.id}`));
     } else {
         dispatch({ type: SUBMIT_FORM_ERRORS, payload: result.errors });
     }

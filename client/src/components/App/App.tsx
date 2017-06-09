@@ -29,8 +29,8 @@ const App: SFC<AppProps> = ({ location }) => (
         >
             <div className={styles.content} key={location.key}>
                 <Switch location={location}>
-                    <Route exact path="/" render={() => <Map />} />
-                    <Route path="/add-sticker" render={() => <AddSticker />}/>
+                    <Route path="/add-sticker" render={() => <AddSticker />} />
+                    <Route path="/:sticker?" component={Map} />
                 </Switch>
             </div>
         </CSSTransitionGroup>
