@@ -47,9 +47,19 @@ class App {
             });
 
             $this->post('/stickers', function (Request $request, Response $response) {
-                return $response->withJson([
-                    'sticker' => Database::createStickerFromRequest($request),
-                ]);
+                try {
+                    $sticker = Database::createStickerFromRequest($request);
+
+                    return $response->withJson([
+                        'sticker' => $sticker,
+                    ]);
+                } catch (\Exception $e) {
+                    // TODO: Better error handling
+                    return $response->withJson([
+                        'error' => 'validation error',
+                        'errors' => ['location'],
+                    ], 400);
+                }
             });
 
             // Show error for calls to non-existent API methods

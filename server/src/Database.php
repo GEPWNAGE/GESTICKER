@@ -44,32 +44,28 @@ class Database {
         }, iterator_to_array($stickers));
     }
 
-    public static function createSticker() {
-        $sticker = self::$stickers->create([
-            'type' => 'placed',
-            'date' => new \DateTime(),
-            'lat' => 51.4473811 + (mt_rand(0, mt_getrandmax() - 1) / mt_getrandmax() * 2) - 1,
-            'lng' => 5.4877141 + (mt_rand(0, mt_getrandmax() - 1) / mt_getrandmax() * 2) - 1,
-        ]);
-
-        return $sticker;
-    }
-
     public static function createStickerFromRequest(Request $request) {
         $body = $request->getParsedBody();
 
         // TODO: Validate
         // TODO: Save uploaded image: $request->getUploadedFiles();
 
-        // TODO: Use `create` instead to persist sticker
-        $sticker = self::$stickers->build([
+        $sticker = self::$stickers->create([
             'type' => $body['type'],
             'date' => new \DateTime($body['date']),
             'lat' => $body['lat'],
             'lng' => $body['lng'],
         ]);
 
-        return $sticker;
+        return [
+            'id' => $sticker->id,
+            'type' => $sticker->type,
+            'date' => $sticker->date->format('Y-m-d'),
+            'coords' => [
+                'lat' => $sticker->lat,
+                'lng' => $sticker->lng,
+            ],
+        ];
     }
 
 }
