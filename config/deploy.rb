@@ -23,7 +23,7 @@ end
 
 task :yarn do
   on roles(:web) do
-    execute "cd #{release_path}/client && yarn install && yarn run build"
+    execute "cd #{release_path}/client && yarn && yarn run build:production"
   end
 end
 
