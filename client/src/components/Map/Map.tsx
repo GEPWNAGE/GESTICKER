@@ -1,6 +1,7 @@
 import GoogleMapReact, { Maps, Options } from 'google-map-react';
 import * as React from 'react';
 import { SFC } from 'react';
+import { RouteComponentProps } from 'react-router';
 import { pure } from 'recompose';
 
 import { Sticker } from '../../types';
@@ -8,9 +9,9 @@ import StickerMarker from '../StickerMarker/StickerMarker';
 
 import * as styles from './Map.scss';
 
-interface MapProps {
+type MapProps = RouteComponentProps<{ sticker: string }> & {
     stickers: Sticker[];
-}
+};
 
 function createMapOptions(maps: Maps): Options {
     return {
