@@ -20,6 +20,7 @@ export async function getUsefulImageData(image: File) {
     const { tags } = await getImageTags(image);
 
     return {
+        author: tags.Artist ? tags.Artist : null,
         createDate: tags.CreateDate ? new Date(tags.CreateDate * 1000) : null,
         coords: tags.GPSLatitude ? {
             lat: tags.GPSLatitude,

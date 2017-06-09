@@ -2,8 +2,6 @@ import * as React from 'react';
 import * as Dropzone from 'react-dropzone';
 import MdFileUpload from 'react-icons/md/file-upload';
 
-import { getUsefulImageData } from '../../helpers/exif';
-
 import * as styles from './ImageDropzone.scss';
 
 interface ImageDropzoneProps {

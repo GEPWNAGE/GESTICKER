@@ -18,6 +18,9 @@ export const setImage = (image: File) => async (dispatch: Dispatch<State>) => {
     try {
         // Set defaults from image EXIF data
         const data = await getUsefulImageData(image);
+        if (data.author) {
+            dispatch(setAuthor(data.author));
+        }
         if (data.createDate) {
             dispatch(setDate(moment(data.createDate)));
         }
