@@ -9,5 +9,5 @@ cache: bundler
 rvm:
   - 2.2
 script:
-  - openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa
-  - bundle exec cap deploy
+  - openssl aes-256-cbc -k "$DEPLOY_KEY" -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa
+  - bundle exec cap deploy production
