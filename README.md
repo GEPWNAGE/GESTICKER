@@ -1,6 +1,8 @@
 # GESTICKER
 > GEWIS sticker database.
 
+[![Build status](https://travis-ci.org/GEPWNAGE/GESTICKER.svg?branch=master)](https://travis-ci.org/GEPWNAGE/GESTICKER?branch=master)
+
 ### Development
 
 #### Start PHP server
