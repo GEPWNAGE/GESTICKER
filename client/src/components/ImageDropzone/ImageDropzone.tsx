@@ -35,7 +35,7 @@ export default class ImageDropzone extends React.Component<ImageDropzoneProps, {
                             <MdFileUpload />
                         </div>
                         <div className={styles.placeholderText}>
-                            Drag image here to upload
+                            Drag photo here to upload
                         </div>
                     </div>
                 )}
