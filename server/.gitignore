@@ -1,3 +1,4 @@
 /vendor/
 /public/build/
 /data/db.sqlite
+/.env

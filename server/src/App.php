@@ -9,8 +9,8 @@ class App {
     public static $config;
     protected $app;
 
-    function __construct() {
-        self::$config = Config::create('development');
+    function __construct($env) {
+        self::$config = Config::create($env);
         $container = new \Slim\Container(self::$config['container']);
         $this->app = new \Slim\App($container);
 

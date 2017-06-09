@@ -27,10 +27,13 @@ class Config {
             ],
 
             'database' => [
-                'driver' => 'pdo_sqlite',
-                'user' => '',
-                'password' => '',
-                'path' => __DIR__ . '/../data/db.sqlite',
+                'driver' => getenv('database_driver'),
+                'user' => getenv('database_user'),
+                'password' => getenv('database_password'),
+                'dbname' => getenv('database_database'),
+                'host' => getenv('database_host'),
+                'port' => getenv('database_port'),
+                'path' => str_replace('__DIR__', __DIR__, getenv('database_path')),
             ],
         ];
     }
