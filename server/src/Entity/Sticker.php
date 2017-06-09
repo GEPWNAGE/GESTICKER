@@ -15,7 +15,8 @@ class Sticker extends Entity {
         return [
             'id' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
             'type' => ['type' => 'string', 'required' => true],
-            'date' => ['type' => 'date', 'required' => true],
+            'author' => ['type' => 'string', 'required' => false],
+            'date' => ['type' => 'date', 'required' => false],
             'lat' => ['type' => 'float', 'required' => true],
             'lng' => ['type' => 'float', 'required' => true],
 
@@ -35,6 +36,19 @@ class Sticker extends Entity {
                 $entity->createdDate = new \DateTime();
             }
         });
+    }
+
+    public function format() {
+        return [
+            'id' => $this->id,
+            'type' => $this->type,
+            'author' => $this->author,
+            'date' => $this->date ? $this->date->format('Y-m-d') : null,
+            'coords' => [
+                'lat' => $this->lat,
+                'lng' => $this->lng,
+            ],
+        ];
     }
 
 }
