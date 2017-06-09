@@ -12,8 +12,8 @@ const isIndexActive = (match: match<{}>, location: Location) => {
         && matchPath(location.pathname, { path: '/add-sticker' }) === null;
 };
 
-const Header: SFC<HeaderProps> = ({ location }) => (
-    <div className={location.pathname === '/' ? styles.headerOverlay : styles.header}>
+const Header: SFC<HeaderProps> = ({ match, location }) => (
+    <div className={isIndexActive(match, location) ? styles.headerOverlay : styles.header}>
         <NavLink to="/" isActive={isIndexActive} className={styles.link} activeClassName={styles.linkActive}>
             <h1 className={styles.logo}>GESTICKER</h1>
         </NavLink>

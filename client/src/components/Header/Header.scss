@@ -6,15 +6,15 @@
     height: $header-height;
     padding: 0 10px;
 
-    background: $color-header;
+    background-color: $color-header;
 
-    transition: background $transition-duration-page * 2 ease;
+    transition: background-color $transition-duration-page * 2 ease;
 }
 
 .headerOverlay {
     composes: header;
 
-    background: rgba($color-primary, 0.8);
+    background-color: $color-header-overlay;
 }
 
 .logo {
