@@ -1,0 +1,23 @@
+@import '../../styles/variables';
+
+.input {
+    padding: 10px 15px;
+
+    font: inherit;
+    border: 2px solid rgba($color-text, 0.1);
+    border-radius: $border-radius;
+
+    transition:
+        border-color $transition-duration ease,
+        box-shadow $transition-duration ease;
+
+    &:hover {
+        border-color: rgba($color-text, 0.2);
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $color-primary;
+        box-shadow: 0 0 0 2px rgba($color-primary, 0.3);
+    }
+}

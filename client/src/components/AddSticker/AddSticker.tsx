@@ -6,6 +6,7 @@ import { SFC } from 'react';
 import Button from '../Button/Button';
 import DatePicker from '../DatePicker/DatePicker';
 import ImageDropzone from '../ImageDropzone/ImageDropzone';
+import Input from '../Input/Input';
 import LocationPicker from '../LocationPicker/LocationPicker';
 import RadioSelect from '../RadioSelect/RadioSelect';
 
@@ -16,6 +17,8 @@ interface AddStickerProps {
     setImage: (image: File) => void;
     type: 'placed' | 'spotted';
     setType: (type: string) => void;
+    author: string;
+    setAuthor: (author: string) => void;
     date: Moment;
     setDate: (date: Moment) => void;
     coords: Coords;
@@ -35,6 +38,8 @@ const AddSticker: SFC<AddStickerProps> = ({
     setImage,
     type,
     setType,
+    author,
+    setAuthor,
     date,
     setDate,
     coords,
@@ -68,13 +73,24 @@ const AddSticker: SFC<AddStickerProps> = ({
             />
         </div>
 
-        <div className={image ? styles.row : styles.rowDisabled}>
-            <div className={styles.rowHeading}>Date</div>
-            <div className={errorClass(errors, 'date')}>Date is required.</div>
-            <DatePicker
-                value={date}
-                onChange={setDate}
-            />
+        <div className={styles.rowContainer}>
+            <div className={image ? styles.row : styles.rowDisabled}>
+                <div className={styles.rowHeading}>Photo author</div>
+                <div className={styles.rowMessage}>Optional</div>
+                <Input
+                    value={author}
+                    onChange={setAuthor}
+                />
+            </div>
+
+            <div className={image ? styles.row : styles.rowDisabled}>
+                <div className={styles.rowHeading}>Photo date</div>
+                <div className={styles.rowMessage}>Optional</div>
+                <DatePicker
+                    value={date}
+                    onChange={setDate}
+                />
+            </div>
         </div>
 
         <div className={image ? styles.row : styles.rowDisabled}>

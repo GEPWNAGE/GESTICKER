@@ -3,13 +3,14 @@ import { bindActionCreators, Dispatch } from 'redux';
 
 import AddSticker from '../components/AddSticker/AddSticker';
 import {
-    resetForm, setCoords, setDate, setImage, setMapCenter, setType, submitForm,
+    resetForm, setAuthor, setCoords, setDate, setImage, setMapCenter, setType, submitForm,
 } from '../redux/add-sticker/actions';
 import { State } from '../redux/reducers';
 
 const mapStateToProps = (state: State) => ({
     image: state.addSticker.image,
     type: state.addSticker.type,
+    author: state.addSticker.author,
     date: state.addSticker.date,
     coords: state.addSticker.coords,
     mapCenter: state.addSticker.mapCenter,
@@ -24,6 +25,7 @@ const mapDispatchToProps = (dispatch: Dispatch<State>) => {
     return bindActionCreators({
         setImage,
         setType,
+        setAuthor,
         setDate,
         setCoords,
         setMapCenter,

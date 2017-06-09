@@ -32,15 +32,7 @@ class Database {
     public static function getStickers() {
         $stickers = self::$stickers->all();
         return array_map(function (Sticker $sticker) {
-            return [
-                'id' => $sticker->id,
-                'type' => $sticker->type,
-                'date' => $sticker->date->format('Y-m-d'),
-                'coords' => [
-                    'lat' => $sticker->lat,
-                    'lng' => $sticker->lng,
-                ],
-            ];
+            return $sticker->format();
         }, iterator_to_array($stickers));
     }
 
@@ -52,20 +44,13 @@ class Database {
 
         $sticker = self::$stickers->create([
             'type' => $body['type'],
-            'date' => new \DateTime($body['date']),
+            'author' => $body['author'] ? $body['author'] : null,
+            'date' => $body['date'] ? new \DateTime($body['date']) : null,
             'lat' => $body['lat'],
             'lng' => $body['lng'],
         ]);
 
-        return [
-            'id' => $sticker->id,
-            'type' => $sticker->type,
-            'date' => $sticker->date->format('Y-m-d'),
-            'coords' => [
-                'lat' => $sticker->lat,
-                'lng' => $sticker->lng,
-            ],
-        ];
+        return $sticker->format();
     }
 
 }

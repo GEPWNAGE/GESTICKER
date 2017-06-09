@@ -13,6 +13,21 @@
     font-size: 1.25rem;
 }
 
+.required {
+    color: $color-error;
+}
+
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 (-$spacing-base);
+
+    & > .row {
+        margin: 0 $spacing-base ($spacing-base * 2);
+    }
+}
+
 .row {
     margin-bottom: $spacing-base * 2;
 
@@ -33,13 +48,18 @@
     margin-bottom: $spacing-base;
 }
 
-.rowError {
+.rowMessage {
     height: 1.25em;
     margin-top: $spacing-base * -0.75;
     margin-bottom: $spacing-base;
 
-    color: $color-error;
     font-size: 0.9rem;
+    color: rgba($color-text, 0.5);
+}
+
+.rowError {
+    composes: rowMessage;
+    color: $color-error;
 
     transition:
         opacity $transition-duration ease,

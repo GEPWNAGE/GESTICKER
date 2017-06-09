@@ -3,6 +3,7 @@ import { Coords } from 'google-map-react';
 export interface Sticker {
     id: number;
     type: string; // 'placed' | 'spotted'
-    date: Date;
+    author?: string;
+    date?: Date;
     coords: Coords;
 }
