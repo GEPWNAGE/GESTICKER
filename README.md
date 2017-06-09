@@ -8,7 +8,7 @@
 #### Start PHP server
 ```shell
 cd server
-php -S localhost:80 -t public -c php.ini
+php -S localhost:80 -t public
 
 ```
 
