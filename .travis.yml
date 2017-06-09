@@ -6,7 +6,7 @@ env:
   - secure: SXcW8C2mXLXRbztN+Ajqoh9xiD7rDoGc0L71GiJKuhfe3G1JOcGlSyF1jShwEewbhvor7ew4SLHkszv2798VM/WViPbNQGy1cl1eg59zWiJLcSfig5nEfZl+UTfOlC2RPa4NPvN5LespPFOP/pwPW6f/G4+CPvLExF5mHMuTAQTA7YAoZXAyF09vi+hofXTTFGyjxK3mn3CUKxhK1tmxM8YuwE3eERxy5VhfutyWaPE01XY17+ahsC6l4omCaLaUUd4HQ0x8AwgLhGxF8tE9u+5fn1N5K0SRQFpAKoIhSU4wHa3AFoMNcmcSktUXKBkyDd3aKvyCNGP2FmYL8XuI3pdNvmrVXhYWq+Cb9lm5sJS6E/OZ+z95ovDT7VEPhcvljk/iaO2iaAH9L5htpE75joYK2nx/i/Q6RpCuQd3PcYQBL4BL7YNr14eNd+MGhwjmtNssDfTHNOkFHA/KMd5MGQZMsRz6zQ+BGLOP7qVNUJuKQ5vOuwcQKpHH6bkRdEdcgWxhgXlOfhHQFFnvCr5xT2cJIm9szi5FeB0K9ka/bepP7yD7lHNkO3/L7X2myJmlQw6ZNcUVuG9L7Qowr4MG5be3qYas0CFmZvFQjqkG4BuA9WKNHgNnyHE5X4fzSFALUGHtwWu28n9qoXjRFVa/PZXMMzcVTZBeDew9gT8FxSo=
 language: ruby
 rvm:
-  - 2.4.1-p11
+  - 2.2
 after_success:
 - openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out
   config/deploy_id_rsa
