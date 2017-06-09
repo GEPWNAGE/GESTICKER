@@ -6,4 +6,8 @@ require('../vendor/autoload.php');
 $dotenv = new \Dotenv\Dotenv(realpath(__DIR__ . '/../'));
 $dotenv->load();
 
-new App(getenv('environment') ?? 'development');
+$env = getenv('environment') ?? 'development';
+
+ini_set('display_errors', $env === 'development' ? E_ALL : 0);
+
+new App($env);
