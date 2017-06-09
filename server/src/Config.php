@@ -24,6 +24,9 @@ class Config {
                 'script' => $env === 'development'
                     ? 'http://localhost:8080/build/bundle.js'
                     : '/build/bundle.js',
+                'style' => $env === 'development'
+                    ? false
+                    : '/build/main.css',
             ],
 
             'database' => [

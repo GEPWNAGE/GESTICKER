@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>GESTICKER</title>
+
+    {% if assets.style %}
+        <link rel="stylesheet" href="{{ assets.style }}">
+    {% endif %}
 </head>
 <body>
     <div id="app"></div>
