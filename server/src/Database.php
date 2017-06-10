@@ -3,6 +3,7 @@ namespace Gesticker;
 
 use Gesticker\Entity\Image;
 use Gesticker\Entity\Sticker;
+use Psr\Http\Message\UploadedFileInterface;
 use Slim\Http\Request;
 use Spot\Locator;
 
@@ -40,7 +41,8 @@ class Database {
         $body = $request->getParsedBody();
 
         // TODO: Validate
-        // TODO: Save uploaded image: $request->getUploadedFiles();
+
+        $image = self::handleImageUpload($request);
 
         $sticker = self::$stickers->create([
             'type' => $body['type'],
@@ -50,7 +52,36 @@ class Database {
             'lng' => $body['lng'],
         ]);
 
+        $image->stickerId = $sticker->id;
+        self::$images->save($image);
+
         return $sticker->format();
+    }
+
+    /**
+     * @param Request $request
+     * @return Image
+     * @throws \Exception
+     */
+    public static function handleImageUpload(Request $request) {
+        $files = $request->getUploadedFiles();
+        if (empty($files['image'])) {
+            throw new \Exception('Expected an image');
+        }
+
+        /** @var UploadedFileInterface $imageFile */
+        $imageFile = $files['image'];
+        if ($imageFile->getError() !== UPLOAD_ERR_OK) {
+            throw new \Exception('Image upload error: ' . $imageFile->getError());
+        }
+
+        $filename = uniqid() . '_' . $imageFile->getClientFilename();
+        $imageFile->moveTo(App::$config['uploads']['path'] . '/' . $filename);
+
+        return self::$images->build([
+            'filename' => $filename,
+            'originalFilename' => $imageFile->getClientFilename(),
+        ]);
     }
 
 }
