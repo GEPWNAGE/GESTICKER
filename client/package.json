@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "build:production": "webpack --env.environment=production",
-    "dev-server": "webpack-dev-server --env.devServer=true",
+    "build:production": "webpack --env.environment=production --env.devtool=source-map",
+    "dev-server": "webpack-dev-server --env.devServer=true --env.devtool=eval-source-map",
     "lint": "tslint \"src/**/!(*.scss.d.ts|!(*.{ts,tsx}))\""
   },
   "dependencies": {
@@ -62,6 +62,7 @@
     "typescript": "^2.3.4",
     "typings-for-css-modules-loader": "^1.5.0",
     "webpack": "^2.6.1",
+    "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-server": "^2.4.5"
   }
 }

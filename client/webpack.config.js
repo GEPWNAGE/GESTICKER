@@ -2,9 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-function baseConfig({ environment, devtool }) {
-    return {
+function baseConfig({ environment, devtool, analyze }) {
+    const config = {
         context: __dirname,
 
         entry: [
@@ -79,16 +80,26 @@ function baseConfig({ environment, devtool }) {
             ]),
 
             new webpack.HotModuleReplacementPlugin(),
-            new webpack.NamedModulesPlugin(),
 
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify(environment),
             }),
         ],
     };
+
+    if (analyze) {
+        config.plugins.push(new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            openAnalyzer: false,
+        }));
+    }
+
+    return config;
 }
 
 function developmentConfig(config, { devServer }) {
+    config.plugins.push(new webpack.NamedModulesPlugin());
+
     // Styles
     config.module.rules.push({
         test: /\.scss$/,
@@ -163,6 +174,8 @@ function productionConfig(config) {
         sourceMap: config.devtool !== false,
     }));
 
+    config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
+
     return config;
 }
 
@@ -170,6 +183,7 @@ function config({
     environment = 'development',
     devServer = false,
     devtool = false,
+    analyze = false,
 } = {}) {
     const environmentConfig = environment === 'development' ? developmentConfig : productionConfig;
 
@@ -177,6 +191,7 @@ function config({
         environment,
         devServer,
         devtool,
+        analyze,
     };
 
     return environmentConfig(baseConfig(env), env);
