@@ -29,6 +29,11 @@ class Database {
         self::$images->migrate();
     }
 
+    public static function getSticker($id) {
+        $sticker = self::$stickers->get($id);
+        return $sticker ? $sticker->format() : null;
+    }
+
     public static function getStickers() {
         $stickers = self::$stickers->all();
         return array_map(function (Sticker $sticker) {
