@@ -46,6 +46,10 @@ class App {
                 ]);
             });
 
+            $this->get('/stickers/{id}', function (Request $request, Response $response, $args) {
+                return $response->withJson(Database::getSticker($args['id']));
+            });
+
             $this->post('/stickers', function (Request $request, Response $response) {
                 try {
                     $sticker = Database::createStickerFromRequest($request);
