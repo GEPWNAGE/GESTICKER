@@ -48,6 +48,9 @@ class Sticker extends Entity {
                 'lat' => $this->lat,
                 'lng' => $this->lng,
             ],
+            'image' => [
+                'filename' => $this->image->filename,
+            ],
         ];
     }
 

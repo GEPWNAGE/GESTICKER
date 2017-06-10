@@ -58,12 +58,17 @@ class App {
                         'sticker' => $sticker,
                     ]);
                 } catch (\Exception $e) {
-                    // TODO: Better error handling
                     return $response->withJson([
-                        'error' => 'validation error',
-                        'errors' => ['location'],
+                        'error' => $e->getMessage(),
                     ], 400);
                 }
+
+//                // TODO: Validation error handling
+//                catch (\Exception $e) {
+//                    return $response->withJson([
+//                        'error' => 'validation error',
+//                    ], 400);
+//                }
             });
 
             // Show error for calls to non-existent API methods

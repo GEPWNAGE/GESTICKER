@@ -36,9 +36,17 @@ class Config {
                 'dbname' => getenv('database_database'),
                 'host' => getenv('database_host'),
                 'port' => getenv('database_port'),
-                'path' => str_replace('__DIR__', __DIR__, getenv('database_path')),
+                'path' => self::fixPath(getenv('database_path')),
+            ],
+
+            'uploads' => [
+                'path' => self::fixPath(getenv('uploads_path')),
             ],
         ];
+    }
+
+    public static function fixPath(string $path) {
+        return str_replace('__SERVER__', __DIR__ . '/..', $path);
     }
 
 }
