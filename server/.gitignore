@@ -1,5 +1,5 @@
 /vendor/
 /public/build/
 /data/db.sqlite
-/data/uploads/
+/public/uploads/
 /.env
