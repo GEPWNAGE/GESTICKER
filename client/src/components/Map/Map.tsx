@@ -30,7 +30,7 @@ const Map: SFC<MapProps> = ({ stickers }) => (
             defaultCenter={{ lat: 51.4473811, lng: 5.4877141 }}
             defaultZoom={17}
             options={createMapOptions}
-            onChildClick={(...params: any[]) => console.log('clicked!', params)}
+            onChildClick={(key: any, props: { sticker: Sticker }) => location.href = `/uploads/${props.sticker.image.filename}`}
         >
             {stickers.map((sticker) => (
                 <StickerMarker

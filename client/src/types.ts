@@ -6,4 +6,9 @@ export interface Sticker {
     author?: string;
     date?: Date;
     coords: Coords;
+    image: Image;
+}
+
+export interface Image {
+    filename: string;
 }
