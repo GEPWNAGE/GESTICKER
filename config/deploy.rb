@@ -14,6 +14,7 @@ set :keep_releases, 5
 set :branch, `git rev-parse HEAD`.chomp
 append :linked_files, 'server/.env'
 append :linked_dirs, 'server/data'
+append :linked_dirs, 'server/public/uploads'
 
 task :composer do
   on roles(:web) do
