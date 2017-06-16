@@ -39,6 +39,7 @@ class App {
     protected function applyRoutes() {
         $app = $this->app;
 
+        // API routes
         $app->group('/api', function () {
             $this->get('/stickers', function (Request $request, Response $response) {
                 return $response->withJson([
@@ -79,7 +80,19 @@ class App {
             });
         });
 
-        // Direct all requests to React entry point
+        // Admin routes
+        $app->group('/admin', function () {
+            $this->get('', function (Request $request, Response $response) {
+                return $this->view->render($response, 'admin/index.twig');
+            });
+
+            // Show 404 error for all other requests
+            $this->get('/[{path:.*}]', function (Request $request, Response $response) {
+                return $response->withStatus(404);
+            });
+        });
+
+        // Direct all other requests to React entry point
         $app->get('[/{path:.*}]', function (Request $request, Response $response) {
             return $this->view->render($response, 'index.twig', [
                 'assets' => App::$config['assets'],
