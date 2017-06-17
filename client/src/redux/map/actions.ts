@@ -10,4 +10,12 @@ export const loadStickers = () => async (dispatch: Dispatch<State>) => {
     dispatch(setStickers(result.stickers));
 };
 
+const shouldLoadStickers = (state: State) => state.map.stickers.length === 0;
+
+export const loadStickersIfNeeded = () => async (dispatch: Dispatch<State>, getState: () => State) => {
+    if (shouldLoadStickers(getState())) {
+        return dispatch(loadStickers());
+    }
+};
+
 export const setStickers = (stickers: Sticker[]) => ({ type: SET_STICKERS, payload: stickers });
