@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 
 import Map from '../components/Map/Map';
-import { loadStickersIfNeeded } from '../redux/map/actions';
+import { clickSticker, loadStickersIfNeeded } from '../redux/map/actions';
 import { State } from '../redux/reducers';
 
 const mapStateToProps = (state: State) => ({
@@ -12,7 +12,9 @@ const mapStateToProps = (state: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {
     dispatch(loadStickersIfNeeded());
 
-    return {};
+    return bindActionCreators({
+        clickSticker,
+    }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

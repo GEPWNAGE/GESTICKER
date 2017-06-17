@@ -11,6 +11,7 @@ import * as styles from './Map.scss';
 
 type MapProps = RouteComponentProps<{ sticker: string }> & {
     stickers: Sticker[];
+    clickSticker: (sticker: Sticker) => void;
 };
 
 function createMapOptions(maps: Maps): Options {
@@ -19,7 +20,7 @@ function createMapOptions(maps: Maps): Options {
     };
 }
 
-const Map: SFC<MapProps> = ({ stickers }) => (
+const Map: SFC<MapProps> = ({ stickers, clickSticker }) => (
     <div className={styles.container}>
         <GoogleMapReact
             bootstrapURLKeys={{
@@ -30,7 +31,7 @@ const Map: SFC<MapProps> = ({ stickers }) => (
             defaultCenter={{ lat: 51.4473811, lng: 5.4877141 }}
             defaultZoom={17}
             options={createMapOptions}
-            onChildClick={(key: any, props: { sticker: Sticker }) => location.href = `/uploads/${props.sticker.image.filename}`}
+            onChildClick={(key: any, props: { sticker: Sticker }) => clickSticker(props.sticker)}
         >
             {stickers.map((sticker) => (
                 <StickerMarker

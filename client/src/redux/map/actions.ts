@@ -1,3 +1,4 @@
+import { replace } from 'react-router-redux';
 import { Dispatch } from 'redux';
 
 import { Sticker } from '../../types';
@@ -19,3 +20,7 @@ export const loadStickersIfNeeded = () => async (dispatch: Dispatch<State>, getS
 };
 
 export const setStickers = (stickers: Sticker[]) => ({ type: SET_STICKERS, payload: stickers });
+
+export const clickSticker = (sticker: Sticker) => (dispatch: Dispatch<State>) => {
+    dispatch(replace(`/${sticker.id}`));
+};
