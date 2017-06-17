@@ -19,22 +19,4 @@
     left: 0;
     right: 0;
     bottom: 0;
-
-    &Enter {
-        opacity: 0;
-
-        &Active {
-            opacity: 1;
-            transition: opacity $transition-duration-page ease;
-        }
-    }
-
-    &Leave {
-        opacity: 1;
-
-        &Active {
-            opacity: 0;
-            transition: opacity $transition-duration-page ease;
-        }
-    }
 }
