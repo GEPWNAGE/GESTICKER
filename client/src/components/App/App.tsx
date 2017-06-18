@@ -15,8 +15,8 @@ const App: SFC<AppProps> = ({ location }) => (
         <div className={styles.header}>
             <Header />
         </div>
-        <div className={styles.content} key={location.key}>
-            <Switch location={location}>
+        <div className={styles.content}>
+            <Switch>
                 <Route path="/add-sticker" render={() => <AddSticker />} />
                 <Route path="/:sticker?" component={Map} />
             </Switch>
