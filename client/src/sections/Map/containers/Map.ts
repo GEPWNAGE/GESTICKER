@@ -3,10 +3,12 @@ import { bindActionCreators, Dispatch } from 'redux';
 
 import { State } from '../../../redux/reducers';
 import Map from '../components/Map/Map';
-import { clickSticker, loadStickersIfNeeded } from '../redux/actions';
+import { changeMap, clickSticker, loadStickersIfNeeded } from '../redux/actions';
 
 const mapStateToProps = (state: State) => ({
     stickers: state.map.stickers,
+    center: state.map.center,
+    zoom: state.map.zoom,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {
@@ -14,6 +16,7 @@ const mapDispatchToProps = (dispatch: Dispatch<State>) => {
 
     return bindActionCreators({
         clickSticker,
+        changeMap,
     }, dispatch);
 };
 

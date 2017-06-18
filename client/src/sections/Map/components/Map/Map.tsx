@@ -1,4 +1,4 @@
-import GoogleMapReact, { Maps, Options } from 'google-map-react';
+import GoogleMapReact, { ChangeEventValue, Coords, Maps, Options } from 'google-map-react';
 import * as React from 'react';
 import { SFC } from 'react';
 import { RouteComponentProps } from 'react-router';
@@ -11,7 +11,9 @@ import * as styles from './Map.scss';
 
 type MapProps = RouteComponentProps<{ sticker: string }> & {
     stickers: Sticker[];
+    center: Coords;
     clickSticker: (sticker: Sticker) => void;
+    changeMap: (value: { center: Coords, zoom: number }) => void;
 };
 
 function createMapOptions(maps: Maps): Options {
@@ -20,7 +22,7 @@ function createMapOptions(maps: Maps): Options {
     };
 }
 
-const Map: SFC<MapProps> = ({ stickers, clickSticker }) => (
+const Map: SFC<MapProps> = ({ stickers, center, clickSticker, changeMap }) => (
     <div className={styles.container}>
         <GoogleMapReact
             bootstrapURLKeys={{
@@ -28,10 +30,11 @@ const Map: SFC<MapProps> = ({ stickers, clickSticker }) => (
                 key: 'AIzaSyAU-Gj-e6WgMYQOA_dsSwX_2yHalMZ_8qU',
                 language: 'nl',
             }}
-            defaultCenter={{ lat: 51.4473811, lng: 5.4877141 }}
+            center={center}
             defaultZoom={17}
             options={createMapOptions}
             onChildClick={(key: any, props: { sticker: Sticker }) => clickSticker(props.sticker)}
+            onChange={(value: ChangeEventValue) => changeMap({ center: value.center, zoom: value.zoom })}
         >
             {stickers.map((sticker) => (
                 <StickerMarker
