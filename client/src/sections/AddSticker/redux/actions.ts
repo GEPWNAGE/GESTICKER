@@ -4,8 +4,8 @@ import { Moment } from 'moment';
 import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
 
-import { getUsefulImageData } from '../../helpers/exif';
-import { State } from '../reducers';
+import { getUsefulImageData } from '../../../helpers/exif';
+import { State } from '../../../redux/reducers';
 
 import {
     RESET_FORM, SET_AUTHOR, SET_COORDS, SET_DATE, SET_IMAGE, SET_MAP_CENTER, SET_TYPE, SUBMIT_FORM, SUBMIT_FORM_ERRORS,

@@ -1,8 +1,8 @@
 import { replace } from 'react-router-redux';
 import { Dispatch } from 'redux';
 
-import { Sticker } from '../../types';
-import { State } from '../reducers';
+import { State } from '../../../redux/reducers';
+import { Sticker } from '../../../types';
 import { SET_STICKERS } from './types';
 
 export const loadStickers = () => async (dispatch: Dispatch<State>) => {

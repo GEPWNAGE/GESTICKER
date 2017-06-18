@@ -4,8 +4,8 @@ import { SFC } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { pure } from 'recompose';
 
-import { Sticker } from '../../types';
-import StickerMarker from '../StickerMarker/StickerMarker';
+import StickerMarker from '../../../../components/StickerMarker/StickerMarker';
+import { Sticker } from '../../../../types';
 
 import * as styles from './Map.scss';
 

@@ -3,12 +3,12 @@ import { Moment } from 'moment';
 import * as React from 'react';
 import { SFC } from 'react';
 
-import Button from '../Button/Button';
-import DatePicker from '../DatePicker/DatePicker';
-import ImageDropzone from '../ImageDropzone/ImageDropzone';
-import Input from '../Input/Input';
-import LocationPicker from '../LocationPicker/LocationPicker';
-import RadioSelect from '../RadioSelect/RadioSelect';
+import Button from '../../../../components/Button/Button';
+import DatePicker from '../../../../components/DatePicker/DatePicker';
+import ImageDropzone from '../../../../components/ImageDropzone/ImageDropzone';
+import Input from '../../../../components/Input/Input';
+import LocationPicker from '../../../../components/LocationPicker/LocationPicker';
+import RadioSelect from '../../../../components/RadioSelect/RadioSelect';
 
 import * as styles from './AddSticker.scss';
 

@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 
-import { Sticker } from '../../types';
+import { Sticker } from '../../../types';
 import { SET_STICKERS } from './types';
 
 export interface MapState {

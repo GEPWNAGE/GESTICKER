@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
+import { State } from '../../../redux/reducers';
 import AddSticker from '../components/AddSticker/AddSticker';
 import {
     resetForm, setAuthor, setCoords, setDate, setImage, setMapCenter, setType, submitForm,
-} from '../redux/add-sticker/actions';
-import { State } from '../redux/reducers';
+} from '../redux/actions';
 
 const mapStateToProps = (state: State) => ({
     image: state.addSticker.image,

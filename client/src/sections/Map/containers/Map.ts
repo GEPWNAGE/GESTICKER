@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
+import { State } from '../../../redux/reducers';
 import Map from '../components/Map/Map';
-import { clickSticker, loadStickersIfNeeded } from '../redux/map/actions';
-import { State } from '../redux/reducers';
+import { clickSticker, loadStickersIfNeeded } from '../redux/actions';
 
 const mapStateToProps = (state: State) => ({
     stickers: state.map.stickers,
