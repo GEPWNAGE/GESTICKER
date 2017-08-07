@@ -13,11 +13,12 @@ type MapProps = RouteComponentProps<{ sticker: string }> & {
     stickers: Sticker[];
     center: Coords;
     zoom: number;
+    activeSticker: Sticker;
     clickSticker: (sticker: Sticker) => void;
     changeMap: (value: { center: Coords, zoom: number }) => void;
 };
 
-const Map: SFC<MapProps> = ({ stickers, center, zoom, clickSticker, changeMap }) => (
+const Map: SFC<MapProps> = ({ stickers, center, zoom, activeSticker, clickSticker, changeMap }) => (
     <div className={styles.container}>
         <StickerMap
             stickers={stickers}
@@ -26,6 +27,12 @@ const Map: SFC<MapProps> = ({ stickers, center, zoom, clickSticker, changeMap })
             onClickSticker={clickSticker}
             onChangeMap={changeMap}
         />
+        {/* TODO: Move to separate component */}
+        {activeSticker && (
+            <div className={styles.detailsOverlay}>
+                {activeSticker.id}
+            </div>
+        )}
     </div>
 );
 

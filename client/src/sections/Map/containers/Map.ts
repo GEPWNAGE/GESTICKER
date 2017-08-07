@@ -9,6 +9,7 @@ const mapStateToProps = (state: State) => ({
     stickers: state.map.stickers,
     center: state.map.center,
     zoom: state.map.zoom,
+    activeSticker: state.map.activeSticker,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<State>) => {

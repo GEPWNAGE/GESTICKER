@@ -2,18 +2,20 @@ import { Coords } from 'google-map-react';
 import { Action } from 'redux';
 
 import { Sticker } from '../../../types';
-import { SET_CENTER, SET_STICKERS, SET_ZOOM } from './types';
+import { SET_ACTIVE_STICKER, SET_CENTER, SET_STICKERS, SET_ZOOM } from './types';
 
 export interface MapState {
     stickers: Sticker[];
     center: Coords;
     zoom: number;
+    activeSticker: Sticker;
 }
 
 const initialState: MapState = {
     stickers: [],
     center: { lat: 51.4473811, lng: 5.4877141 },
     zoom: 17,
+    activeSticker: null,
 };
 
 export default function mapReducer(state: MapState, action: Action): MapState {
@@ -28,6 +30,8 @@ export default function mapReducer(state: MapState, action: Action): MapState {
             return { ...state, center: action.payload };
         case SET_ZOOM:
             return { ...state, zoom: action.payload };
+        case SET_ACTIVE_STICKER:
+            return { ...state, activeSticker: action.payload };
         default:
             return state;
     }
