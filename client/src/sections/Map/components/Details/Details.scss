@@ -1,0 +1,13 @@
+@import '../../../../styles/variables';
+
+.details {
+    margin: $spacing-base;
+    padding: $spacing-base;
+    max-width: 400px;
+
+    border-radius: $border-radius;
+    box-shadow: 1px 1px 4px rgba(black, 0.2);
+    background: $color-background;
+
+    pointer-events: all;
+}

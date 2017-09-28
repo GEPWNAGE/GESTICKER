@@ -1,3 +1,5 @@
+@import '../../../../styles/variables';
+
 .container {
     width: 100%;
     height: 100%;
@@ -5,10 +7,10 @@
 
 .detailsOverlay {
     position: absolute;
+    top: $header-height;
     left: 0;
+    right: 0;
     bottom: 0;
-    width: 200px;
-    height: 200px;
 
-    background: orange;
+    pointer-events: none;
 }

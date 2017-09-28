@@ -5,6 +5,7 @@ import { RouteComponentProps } from 'react-router';
 import { pure } from 'recompose';
 
 import { Sticker } from '../../../../types';
+import Details from '../Details/Details';
 import StickerMap from '../StickerMap/StickerMap';
 
 import * as styles from './Map.scss';
@@ -30,7 +31,7 @@ const Map: SFC<MapProps> = ({ stickers, center, zoom, activeSticker, clickSticke
         {/* TODO: Move to separate component */}
         {activeSticker && (
             <div className={styles.detailsOverlay}>
-                {activeSticker.id}
+                <Details sticker={activeSticker} />
             </div>
         )}
     </div>
