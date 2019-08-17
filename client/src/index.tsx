@@ -1,7 +1,6 @@
 import createHistory from 'history/createBrowserHistory';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 
 import App, { AppContainerProps } from './containers/App';
 import configureStore from './redux/store';
@@ -14,9 +13,7 @@ const store = configureStore(history);
 const app = document.getElementById('app');
 function render(AppComponent: React.ComponentType<AppContainerProps>) {
     ReactDOM.render((
-        <AppContainer>
-            <AppComponent store={store} history={history} />
-        </AppContainer>
+        <AppComponent store={store} history={history} />
     ), app);
 }
 

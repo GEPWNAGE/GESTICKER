@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const { CheckerPlugin } = require('awesome-typescript-loader');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -20,6 +20,7 @@ function baseConfig({ environment, devtool, analyze }) {
 
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.json'],
+            alias: {},
         },
 
         module: {
@@ -28,17 +29,22 @@ function baseConfig({ environment, devtool, analyze }) {
                     test: /\.tsx?$/,
                     use: [
                         {
-                            loader: 'awesome-typescript-loader',
+                            loader: 'babel-loader',
                             options: {
-                                useBabel: true,
-                                babelOptions: {
-                                    presets: [
-                                        'react',
-                                    ],
-                                    plugins: [
-                                        'react-hot-loader/babel',
-                                    ],
-                                },
+
+                                presets: [
+                                    '@babel/preset-env',
+                                    '@babel/preset-react',
+                                ],
+                                plugins: [
+                                    'react-hot-loader/babel',
+                                ],
+                            }
+                        },
+                        {
+                            loader: 'ts-loader',
+                            options: {
+                                transpileOnly: true,
                             },
                         },
                     ],
@@ -52,8 +58,8 @@ function baseConfig({ environment, devtool, analyze }) {
                             loader: 'babel-loader',
                             options: {
                                 presets: [
-                                    ['es2015', { modules: false }],
-                                    'react',
+                                    ['@babel/preset-env', { modules: false }],
+                                    '@babel/preset-react',
                                 ],
                                 plugins: [
                                     'react-hot-loader/babel',
@@ -73,7 +79,7 @@ function baseConfig({ environment, devtool, analyze }) {
         },
 
         plugins: [
-            new CheckerPlugin(),
+            new ForkTsCheckerWebpackPlugin(),
 
             new webpack.WatchIgnorePlugin([
                 /scss\.d\.ts$/,
@@ -106,11 +112,11 @@ function developmentConfig(config, { devServer }) {
         use: [
             { loader: 'style-loader' },
             {
-                loader: 'typings-for-css-modules-loader',
+                loader: 'css-loader',
                 options: {
-                    namedExport: true,
+                    // namedExport: true,
                     modules: true,
-                    localIdentName: '[name]-[local]-[hash:base64:5]',
+                    // localIdentName: '[name]-[local]-[hash:base64:5]',
                     importLoaders: 1,
                 },
             },
@@ -122,6 +128,8 @@ function developmentConfig(config, { devServer }) {
     if (devServer) {
         config.entry.unshift('react-hot-loader/patch');
         config.entry.unshift('webpack-dev-server/client?http://localhost:8080');
+
+        config.resolve.alias['react-dom'] = '@hot-loader/react-dom';
 
         config.devServer = {
             host: 'localhost',

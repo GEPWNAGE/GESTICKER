@@ -4,6 +4,7 @@ import { SFC } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { Store } from 'redux';
+import { hot } from 'react-hot-loader/root';
 
 import App from '../components/App/App';
 import { State } from '../redux/reducers';
@@ -21,4 +22,4 @@ const AppContainer: SFC<AppContainerProps> = ({ store, history }) => (
     </ReduxProvider>
 );
 
-export default AppContainer;
+export default hot(AppContainer);
