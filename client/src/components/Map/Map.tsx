@@ -2,8 +2,8 @@ import * as React from 'react';
 import { FC } from 'react';
 import ReactMapboxFactory from 'react-mapbox-gl';
 import { RouteComponentProps } from 'react-router';
-import { pure } from 'recompose';
 
+import history from '../../history';
 import { Sticker, Coords } from '../../types';
 import StickerMarker from '../StickerMarker/StickerMarker';
 
@@ -32,12 +32,11 @@ const Map: FC<MapProps> = ({ stickers }) => (
                     key={sticker.id}
                     coordinates={sticker.coords}
                     sticker={sticker}
-                    // TODO: Implement proper onClick
-                    onClick={(e) => console.log(e)}
+                    onClick={() => history.push(`/${sticker.id}`)}
                 />
             ))}
         </Mapbox>
     </div>
 );
 
-export default pure(Map);
+export default Map;

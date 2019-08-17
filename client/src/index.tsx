@@ -1,13 +1,12 @@
-import createHistory from 'history/createBrowserHistory';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import App, { AppContainerProps } from './containers/App';
 import configureStore from './redux/store';
+import history from './history';
 
 import './styles/index.scss';
 
-const history = createHistory();
 const store = configureStore(history);
 
 const app = document.getElementById('app');
