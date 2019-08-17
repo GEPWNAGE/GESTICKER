@@ -1,10 +1,10 @@
-import GoogleMapReact, { Maps, Options } from 'google-map-react';
 import * as React from 'react';
-import { SFC } from 'react';
+import { FC } from 'react';
+import ReactMapboxFactory from 'react-mapbox-gl';
 import { RouteComponentProps } from 'react-router';
 import { pure } from 'recompose';
 
-import { Sticker } from '../../types';
+import { Sticker, Coords } from '../../types';
 import StickerMarker from '../StickerMarker/StickerMarker';
 
 import * as styles from './Map.scss';
@@ -13,33 +13,30 @@ type MapProps = RouteComponentProps<{ sticker: string }> & {
     stickers: Sticker[];
 };
 
-function createMapOptions(maps: Maps): Options {
-    return {
-        fullscreenControl: false,
-    };
-}
+const Mapbox = ReactMapboxFactory({
+    accessToken: process.env.MAPBOX_ACCESS_TOKEN,
+});
 
-const Map: SFC<MapProps> = ({ stickers }) => (
+const defaultCenter: Coords = [5.4877141, 51.4473811];
+
+const Map: FC<MapProps> = ({ stickers }) => (
     <div className={styles.container}>
-        <GoogleMapReact
-            bootstrapURLKeys={{
-                // TODO: Restrict Google Maps API key
-                key: 'AIzaSyAU-Gj-e6WgMYQOA_dsSwX_2yHalMZ_8qU',
-                language: 'nl',
-            }}
-            defaultCenter={{ lat: 51.4473811, lng: 5.4877141 }}
-            defaultZoom={17}
-            options={createMapOptions}
-            onChildClick={(key: any, props: { sticker: Sticker }) => location.href = `/uploads/${props.sticker.image.filename}`}
+        <Mapbox
+            style="mapbox://styles/mapbox/streets-v9"
+            containerStyle={{ width: '100%', height: '100%' }}
+            center={defaultCenter}
+            renderChildrenInPortal
         >
             {stickers.map((sticker) => (
                 <StickerMarker
                     key={sticker.id}
-                    {...sticker.coords}
+                    coordinates={sticker.coords}
                     sticker={sticker}
+                    // TODO: Implement proper onClick
+                    onClick={(e) => console.log(e)}
                 />
             ))}
-        </GoogleMapReact>
+        </Mapbox>
     </div>
 );
 

@@ -1,17 +1,25 @@
-import { ChildComponentProps } from 'google-map-react';
 import * as React from 'react';
-import { SFC } from 'react';
+import { FC } from 'react';
 
-import { Sticker } from '../../types';
+import { Sticker, Coords } from '../../types';
 
 import * as styles from './StickerMarker.scss';
+import { Marker } from 'react-mapbox-gl';
 
-type StickerMarkerProps = ChildComponentProps & {
+type StickerMarkerProps = {
     sticker?: Sticker;
+    coordinates: Coords;
+    onClick: React.MouseEventHandler<HTMLDivElement>;
 };
 
-const StickerMarker: SFC<StickerMarkerProps> = ({ sticker, $hover }) => (
-    <div className={$hover ? styles.markerHover : styles.marker} />
+const StickerMarker: FC<StickerMarkerProps> = ({ coordinates, onClick }) => (
+    <Marker
+        coordinates={coordinates}
+        onClick={onClick}
+        style={{ width: 0, height: 0 }}
+    >
+        <div className={styles.marker} />
+    </Marker>
 );
 
 export default StickerMarker;

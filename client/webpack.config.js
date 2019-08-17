@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const Dotenv = require('dotenv-webpack');
 
 function baseConfig({ environment, devtool, analyze }) {
     const config = {
@@ -75,6 +76,14 @@ function baseConfig({ environment, devtool, analyze }) {
                         {loader: 'file-loader'},
                     ],
                 },
+
+                {
+                    test: require.resolve('mapbox-gl/dist/mapbox-gl.css'),
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                    ],
+                }
             ],
         },
 
@@ -90,6 +99,8 @@ function baseConfig({ environment, devtool, analyze }) {
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify(environment),
             }),
+
+            new Dotenv(),
         ],
     };
 

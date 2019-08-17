@@ -45,8 +45,8 @@ class Sticker extends Entity {
             'author' => $this->author,
             'date' => $this->date ? $this->date->format('Y-m-d') : null,
             'coords' => [
-                'lat' => $this->lat,
-                'lng' => $this->lng,
+                $this->lng,
+                $this->lat,
             ],
             'image' => [
                 'filename' => $this->image->filename,
