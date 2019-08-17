@@ -1,13 +1,15 @@
+$marker-size: 36px;
+
 .marker {
-    width: 28px;
-    height: 28px;
+    width: $marker-size;
+    height: $marker-size;
 
     background: white;
-    border-radius: 100% 100% 0 100%;
-    box-shadow: 1px 1px 4px rgba(black, 0.2);
+    border-radius: ($marker-size / 2) ($marker-size / 2) 2px ($marker-size / 2);
+    box-shadow: 0 0 0 1px rgba(black, 0.05), 1.5px 1.5px 4px rgba(black, 0.25);
     cursor: pointer;
 
-    transform: translate3d(-28px, -28px, 0) rotate(45deg);
+    transform: translate3d(-$marker-size, -$marker-size, 0) rotate(45deg);
     transform-origin: 100% 100%;
 
     transition: transform 100ms ease;
@@ -15,18 +17,17 @@
     &::after {
         content: '';
         display: block;
-        width: 28px;
-        height: 28px;
+        width: $marker-size;
+        height: $marker-size;
 
-        background: url('./gewis-logo.svg') 50% 60% no-repeat;
-        background-size: 20px 20px;
+        background: url('./gewis-logo.svg') 50% 80% no-repeat;
+        background-size: 40%;
 
         transform: rotate(-45deg);
     }
+
+    &:hover {
+        transform: translate3d(-$marker-size, -$marker-size, 0) rotate(45deg) scale(1.1);
+    }
 }
 
-.markerHover {
-    composes: marker;
-
-    transform: translate3d(-28px, -28px, 0) rotate(45deg) scale(1.2);
-}
