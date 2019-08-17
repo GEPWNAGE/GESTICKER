@@ -1,40 +1,17 @@
 @import '../../styles/variables';
 
 .app {
+    display: flex;
+    flex-direction: column;
+
     width: 100%;
     height: 100%;
 }
 
 .header {
-    position: absolute;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    right: 0;
+    flex: 0 0 auto;
 }
 
 .content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    &Enter {
-        opacity: 0;
-
-        &Active {
-            opacity: 1;
-            transition: opacity $transition-duration-page ease;
-        }
-    }
-
-    &Leave {
-        opacity: 1;
-
-        &Active {
-            opacity: 0;
-            transition: opacity $transition-duration-page ease;
-        }
-    }
+    flex: 1 0 auto;
 }

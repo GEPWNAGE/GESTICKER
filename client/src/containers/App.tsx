@@ -1,8 +1,7 @@
-import { History } from 'history';
 import * as React from 'react';
 import { FC } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { Store } from 'redux';
 import { hot } from 'react-hot-loader/root';
 
@@ -11,14 +10,13 @@ import { State } from '../redux/reducers';
 
 export interface AppContainerProps {
     store: Store<State>;
-    history: History;
 }
 
-const AppContainer: FC<AppContainerProps> = ({ store, history }) => (
+const AppContainer: FC<AppContainerProps> = ({ store }) => (
     <ReduxProvider store={store}>
-        <ConnectedRouter store={store} history={history}>
+        <BrowserRouter>
             <App />
-        </ConnectedRouter>
+        </BrowserRouter>
     </ReduxProvider>
 );
 

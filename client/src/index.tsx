@@ -13,7 +13,7 @@ const store = configureStore(history);
 const app = document.getElementById('app');
 
 function render(AppComponent: React.ElementType<AppContainerProps>) {
-    ReactDOM.render(<AppComponent store={store} history={history} />, app);
+    ReactDOM.render(<AppComponent store={store} />, app);
 }
 
 render(App);
