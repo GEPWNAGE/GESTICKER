@@ -11,10 +11,9 @@ const history = createHistory();
 const store = configureStore(history);
 
 const app = document.getElementById('app');
-function render(AppComponent: React.ComponentType<AppContainerProps>) {
-    ReactDOM.render((
-        <AppComponent store={store} history={history} />
-    ), app);
+
+function render(AppComponent: React.ElementType<AppContainerProps>) {
+    ReactDOM.render(<AppComponent store={store} history={history} />, app);
 }
 
 render(App);

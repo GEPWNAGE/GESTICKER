@@ -1,6 +1,6 @@
 import { History } from 'history';
 import * as React from 'react';
-import { SFC } from 'react';
+import { FC } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { Store } from 'redux';
@@ -14,7 +14,7 @@ export interface AppContainerProps {
     history: History;
 }
 
-const AppContainer: SFC<AppContainerProps> = ({ store, history }) => (
+const AppContainer: FC<AppContainerProps> = ({ store, history }) => (
     <ReduxProvider store={store}>
         <ConnectedRouter store={store} history={history}>
             <App />
