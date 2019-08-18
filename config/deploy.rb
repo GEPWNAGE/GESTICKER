@@ -27,6 +27,8 @@ end
 
 task :sticker_client do
   on roles(:web) do
+    execute "curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.17.3"
+    execute "export PATH=$HOME/.yarn/bin:$PATH"
     execute "cd #{release_path}/client && yarn && yarn run build:production"
   end
 end

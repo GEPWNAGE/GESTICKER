@@ -17,6 +17,3 @@ script:
 - openssl aes-256-cbc -k "$DEPLOY_KEY" -in config/deploy_id_rsa_enc_travis -d -a -out
   config/deploy_id_rsa
 - bundle exec cap production deploy
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.17.3
-  - export PATH=$HOME/.yarn/bin:$PATH
