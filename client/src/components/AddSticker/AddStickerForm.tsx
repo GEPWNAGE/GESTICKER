@@ -20,6 +20,7 @@ import RadioSelect from '../RadioSelect/RadioSelect';
 import TextInput from '../TextInput/TextInput';
 import * as styles from './AddSticker.scss';
 import StickerSchema from './StickerSchema';
+import history from '../../history';
 
 interface FormValues {
     image: File;
@@ -191,7 +192,25 @@ export default withFormik<{}, FormValues>({
 
     validationSchema: StickerSchema,
 
-    handleSubmit(values) {
-        console.log(values);
+    async handleSubmit(values) {
+        const data = new FormData();
+        data.append('image', values.image);
+        data.append('type', values.type);
+        data.append('author', values.author);
+        data.append('date', values.date ? values.date.toISOString() : '');
+        data.append('lng', values.coords[0].toString());
+        data.append('lat', values.coords[1].toString());
+
+        const response = await fetch('/api/stickers', {
+            method: 'POST',
+            body: data,
+        });
+        const result = await response.json();
+
+        if (response.status === 200) {
+            history.push(`/${result.sticker.id}`);
+        } else {
+            console.log(result.errors);
+        }
     },
 })(AddStickerForm);
