@@ -101,6 +101,7 @@ function baseConfig({ environment, devtool, analyze }) {
 
             new Dotenv({
                 systemvars: true,
+                defaults: true,
             }),
         ],
     };
