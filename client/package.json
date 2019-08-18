@@ -45,7 +45,7 @@
     "@types/react-hot-loader": "^4.1.0",
     "@types/react-icons": "^2.2.1",
     "@types/react-router-dom": "^4.3.4",
-    "@types/supercluster": "^5.0.1",
+    "@types/supercluster": "3.0.2",
     "@types/webpack-env": "^1.13.0",
     "@types/yup": "^0.26.22",
     "babel-loader": "^8.0.6",

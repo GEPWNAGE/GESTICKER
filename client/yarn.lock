@@ -821,9 +821,9 @@
     "@types/react" "*"
 
 "@types/history@*":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.5.1.tgz#da4a145410466eac20e94b51c8778a7551d1d4db"
-  integrity sha1-2koUVBBGbqwg6UtRyHeKdVHR1Ns=
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
+  integrity sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
 
 "@types/mapbox-gl@^0.54.2":
   version "0.54.2"
@@ -902,9 +902,9 @@
     "@types/react-router" "*"
 
 "@types/react-router@*":
-  version "4.0.11"
-  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-4.0.11.tgz#de631d00477081c24a4668c10287ea5f3cd51311"
-  integrity sha512-lwa2ml/dzYlg+kAElBfBGswvVtuN9kX8H8E0ag/h0u60I8Uw7zeuTV8DN45r7/73S+jeA0uEqybA7KYe0JEDbA==
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.0.3.tgz#855a1606e62de3f4d69ea34fb3c0e50e98e964d5"
+  integrity sha512-j2Gge5cvxca+5lK9wxovmGPgpVJMwjyu5lTA/Cd6fLGoPq7FXcUE1jFkEdxeyqGGz8VfHYSHCn5Lcn24BzaNKA==
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
@@ -917,10 +917,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/supercluster@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@types/supercluster/-/supercluster-5.0.1.tgz#0b25cca65b06d22fc24acc6b004843acd5d105a9"
-  integrity sha512-HpL0RXND3iR4O5MXi/4X+PoTkHA6sEFDq54qRD1Ps0YeceL5jyg9gMUeQvNU9HJpUXWbzwpCTP9hH3yQAqF9wg==
+"@types/supercluster@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/supercluster/-/supercluster-3.0.2.tgz#dc11a6afa3d21b1a3d8510b1759a668fdf19e254"
+  integrity sha512-BSGVanlDm1+D3dcGKcy9pQurYAP1/5Jof9qkoyE8oYAxFEKIyUrieZ19V/B61Cw7N8eBy6bqtKGJK1YwbLSyEg==
   dependencies:
     "@types/geojson" "*"
 
