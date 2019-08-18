@@ -1,4 +1,3 @@
-sudo: required
 env:
   global:
   - secure: mjc0b+GLhxgYenFkj1+uHiRYDtqMRMCBJ4KMjRSKSHxj31PzObc+Ew82Zj8LqxBMyT/zB5DJBoiKVwQ52aCVTCmvb//Xf4sS467D2XdOTNwuBBlgyHm4NeEFCA8qcc+RpROjTjrFGqAserwAHbeUdSSyoUKugk+2O4g6jZYyhKgG5Aktu279DsaWJBoJUErKt61dT0xlHACgB0rVkKsAXOXFmHEkHPhrIFrTGq32LW8imtxbi4AYLz73H8M/nqYK3wWSCcTUuEHl5hoblhJBpURulj7CyaOf1Ko7LI7LeFx4AVmJn9SW+kwio29oFO3+Na3VGrWIIWoSggUvrHeRe6X3clFnx4jJ+KNcwOpix4cwqXDoQnx8/FjLKR3xdWeGXg+rVYT7jYxvlo5OChjUIeQXL5EjyejqGlEavGtdtkLG2csR/E29tc/cE8x5I3itdeEX6rDAql4vqlKTLDQuwtACMK6yYqkQhG8UutTn0lj4szQIvdNAr4oNX4Eloihu8yhLPg8iwS3SsvVHTBVjKmoez35JgYKGJqEZDmDq4wcP8NAJPgrL+VQyx/z90AUgNoqW/qd61NhDbnaFcCZOBsxkM3tXkPinAyv9wZVDgzxo6c1UuZKC8m2lPhqW+rnCNdlywfBIxcWaJk5sitj04CtgjmtjTMxliIrVoEvAYlc=
@@ -19,8 +18,5 @@ script:
   config/deploy_id_rsa
 - bundle exec cap production deploy
 before_install:
-  # Repo for Yarn
-  - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
-  - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-  - sudo apt-get update -qq
-  - sudo apt-get install -y -qq yarn
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.17.3
+  - export PATH=$HOME/.yarn/bin:$PATH
