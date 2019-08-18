@@ -70,17 +70,19 @@ export default function Map({ match }: MapProps) {
 
     // Pan to and zoom in on the active sticker
     useEffect(() => {
-        setTransform({
-            ...transform,
-            center: activeSticker ? activeSticker.coords : defaultCenter,
-            zoom: [
-                // Only zoom in to default zoom, do not zoom out
-                Math.max(
-                    mapRef.current ? mapRef.current.getZoom() : defaultZoom,
-                    defaultZoom,
-                ),
-            ],
-        });
+        if (activeSticker) {
+            setTransform({
+                ...transform,
+                center: [...activeSticker.coords] as Coords,
+                zoom: [
+                    // Only zoom in to default zoom, do not zoom out
+                    Math.max(
+                        mapRef.current ? mapRef.current.getZoom() : defaultZoom,
+                        defaultZoom,
+                    ),
+                ],
+            });
+        }
     }, [activeSticker]);
 
     return (
@@ -98,6 +100,13 @@ export default function Map({ match }: MapProps) {
                             popupRef.current.scheduleUpdate();
                         }
                     }}
+                    onClick={(map, e: any) => {
+                        // Close active sticker popup when clicking outside it
+                        const { target } = e.originalEvent;
+                        if (target.classList.contains('mapboxgl-canvas')) {
+                            history.push('/');
+                        }
+                    }}
                 >
                     <>
                         {stickers
@@ -107,7 +116,7 @@ export default function Map({ match }: MapProps) {
                                     key={sticker.id}
                                     coordinates={sticker.coords}
                                     sticker={sticker}
-                                    onClick={() => {
+                                    onClick={(e) => {
                                         // Transition to the clicked sticker
                                         setMovingMethod('flyTo');
                                         history.push(`/${sticker.id}`);
