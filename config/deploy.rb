@@ -16,21 +16,19 @@ append :linked_files, 'server/.env'
 append :linked_dirs, 'server/data'
 append :linked_dirs, 'server/public/uploads'
 
-task :composer do
+task :sticker_server do
   on roles(:web) do
     execute "cd #{release_path}/server && composer install"
   end
 end
 
-task :yarn do
+task :sticker_client do
   on roles(:web) do
     execute "cd #{release_path}/client && yarn && yarn run build:production"
   end
 end
 
-after 'deploy:updated', 'composer'
-after 'deploy:updated', 'yarn'
 
-namespace :deploy do
-  after :starting, 'composer:install_executable'
-end
+after 'deploy:starting', 'composer:install_executable'
+after 'deploy:updated', 'sticker_server'
+after 'deploy:updated', 'sticker_client'
