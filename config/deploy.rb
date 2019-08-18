@@ -27,7 +27,7 @@ end
 
 task :sticker_client do
   on roles(:web) do
-    execute "cd #{release_path}/client && ~/.yarn/bin/yarn && ~/.yarn/bin/yarn run build:production"
+    execute "cd #{release_path}/client && $HOME/.yarn/bin/yarn && $HOME/.yarn/bin/yarn run build:production"
   end
 end
 
