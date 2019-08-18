@@ -21,7 +21,9 @@ SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}
 
 task :sticker_server do
   on roles(:web) do
-    execute "cd #{release_path}/server && php #{shared_path.join("composer.phar")} install"
+    within "#{release_path}/server" do
+      execute :composer, :install
+    end
   end
 end
 
