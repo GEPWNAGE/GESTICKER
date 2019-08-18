@@ -9,7 +9,7 @@ import { Marker } from 'react-mapbox-gl';
 type StickerMarkerProps = {
     sticker?: Sticker;
     coordinates: Coords;
-    onClick: React.MouseEventHandler<HTMLDivElement>;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
 const StickerMarker: FC<StickerMarkerProps> = ({ coordinates, onClick }) => (

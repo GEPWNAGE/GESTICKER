@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import * as React from 'react';
-import { SFC } from 'react';
+import { FC } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/src/stylesheets/datepicker-cssmodules.scss';
 
@@ -11,8 +11,9 @@ interface DatePickerProps {
     onChange: (date: Moment) => void;
 }
 
-const DatePicker: SFC<DatePickerProps> = ({ value, onChange }) => (
+const DatePicker: FC<DatePickerProps> = ({ value, onChange, ...otherProps }) => (
     <ReactDatePicker
+        {...otherProps}
         selected={value}
         onChange={onChange}
         className={styles.input}

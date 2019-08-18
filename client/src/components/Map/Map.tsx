@@ -9,15 +9,15 @@ import StickerMarker from '../StickerMarker/StickerMarker';
 
 import * as styles from './Map.scss';
 
-type MapProps = RouteComponentProps<{ sticker: string }> & {
-    stickers: Sticker[];
-};
-
 const Mapbox = ReactMapboxFactory({
     accessToken: process.env.MAPBOX_ACCESS_TOKEN,
 });
 
 const defaultCenter: Coords = [5.4877141, 51.4473811];
+
+type MapProps = RouteComponentProps<{ sticker: string }> & {
+    stickers: Sticker[];
+};
 
 const Map: FC<MapProps> = ({ stickers }) => (
     <div className={styles.container}>
