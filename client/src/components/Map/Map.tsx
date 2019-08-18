@@ -1,11 +1,13 @@
 import * as MapboxGl from 'mapbox-gl';
 import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import ReactMapboxFactory from 'react-mapbox-gl';
+import ReactMapboxFactory, { Marker } from 'react-mapbox-gl';
+import { Manager, Reference, Popper } from 'react-popper';
 import { RouteComponentProps } from 'react-router';
 
 import history from '../../history';
 import { Sticker, Coords } from '../../types';
+import StickerPopup from '../StickerPopup/StickerPopup';
 import StickerMarker from '../StickerMarker/StickerMarker';
 
 import * as styles from './Map.scss';
@@ -24,6 +26,7 @@ type MapProps = RouteComponentProps<{ sticker: string }> & {
 export default function Map({ match }: MapProps) {
     // Reference to the underlying Mapbox Map, used for getting current zoom
     const mapRef = useRef<MapboxGl.Map>(null);
+    const popupRef = useRef<StickerPopup>(null);
 
     const [transform, setTransform] = useState<{
         center: Coords;
@@ -77,27 +80,57 @@ export default function Map({ match }: MapProps) {
 
     return (
         <div className={styles.container}>
-            <Mapbox
-                style="mapbox://styles/mapbox/streets-v11"
-                containerStyle={{ width: '100%', height: '100%' }}
-                onStyleLoad={(map) => (mapRef.current = map)}
-                renderChildrenInPortal
-                movingMethod={movingMethod}
-                {...transform}
-            >
-                {stickers.map((sticker) => (
-                    <StickerMarker
-                        key={sticker.id}
-                        coordinates={sticker.coords}
-                        sticker={sticker}
-                        onClick={() => {
-                            // Transition to the clicked sticker
-                            setMovingMethod('flyTo');
-                            history.push(`/${sticker.id}`);
-                        }}
-                    />
-                ))}
-            </Mapbox>
+            <Manager>
+                <Mapbox
+                    style="mapbox://styles/mapbox/streets-v11"
+                    containerStyle={{ width: '100%', height: '100%' }}
+                    onStyleLoad={(map) => (mapRef.current = map)}
+                    renderChildrenInPortal
+                    movingMethod={movingMethod}
+                    {...transform}
+                    onMove={() => {
+                        if (popupRef.current) {
+                            popupRef.current.scheduleUpdate();
+                        }
+                    }}
+                >
+                    <>
+                        {stickers
+                            .filter((sticker) => sticker !== activeSticker)
+                            .map((sticker) => (
+                                <StickerMarker
+                                    key={sticker.id}
+                                    coordinates={sticker.coords}
+                                    sticker={sticker}
+                                    onClick={() => {
+                                        // Transition to the clicked sticker
+                                        setMovingMethod('flyTo');
+                                        history.push(`/${sticker.id}`);
+                                    }}
+                                />
+                            ))}
+                        {activeSticker && (
+                            <Marker coordinates={activeSticker.coords}>
+                                <Reference>
+                                    {(refProps) => <div {...refProps} />}
+                                </Reference>
+                            </Marker>
+                        )}
+                    </>
+                </Mapbox>
+
+                {activeSticker && (
+                    <Popper placement="top">
+                        {({ ref, ...otherProps }) => (
+                            <StickerPopup
+                                ref={popupRef}
+                                popperRef={ref}
+                                {...otherProps}
+                            />
+                        )}
+                    </Popper>
+                )}
+            </Manager>
         </div>
     );
 }
