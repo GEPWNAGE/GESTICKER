@@ -33,7 +33,12 @@ function baseConfig({ environment, devtool, analyze }) {
                         {
                             loader: 'css-loader',
                             options: {
-                                modules: true,
+                                modules: {
+                                    localIdentName:
+                                        environment === 'production'
+                                            ? '[hash:base64]'
+                                            : '[path][name]__[local]',
+                                },
                                 importLoaders: 1,
                             },
                         },
