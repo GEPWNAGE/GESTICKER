@@ -16,12 +16,14 @@ import Button from '../Button/Button';
 import DatePicker from '../DatePicker/DatePicker';
 import ImageDropzone from '../ImageDropzone/ImageDropzone';
 import LocationPicker from '../LocationPicker/LocationPicker';
+import RadioSelect from '../RadioSelect/RadioSelect';
 import TextInput from '../TextInput/TextInput';
 import * as styles from './AddSticker.scss';
 import StickerSchema from './StickerSchema';
 
 interface FormValues {
     image: File;
+    type: string;
     author: string;
     date: Moment;
     coords: Coords;
@@ -119,6 +121,20 @@ function AddStickerForm(props: FormikProps<FormValues>) {
                     />
                 )}
             />
+            <FormRow
+                name="type"
+                label="Did you place or spot this sticker?"
+                disabled={!values.image}
+                renderInput={({ field }) => (
+                    <RadioSelect
+                        options={{
+                            placed: 'Placed',
+                            spotted: 'Spotted',
+                        }}
+                        {...field}
+                    />
+                )}
+            />
             <div className={styles.rowContainer}>
                 <FormRow
                     name="author"
@@ -166,6 +182,7 @@ export default withFormik<{}, FormValues>({
     mapPropsToValues() {
         return {
             image: null,
+            type: '',
             author: '',
             date: null,
             coords: null,

@@ -1,5 +1,9 @@
 @import '../../styles/variables';
 
+.input {
+    display: none;
+}
+
 .select {
     display: flex;
     flex-direction: row;
