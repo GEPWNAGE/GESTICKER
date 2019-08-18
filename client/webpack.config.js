@@ -99,7 +99,9 @@ function baseConfig({ environment, devtool, analyze }) {
 
             new webpack.HotModuleReplacementPlugin(),
 
-            new Dotenv(),
+            new Dotenv({
+                systemvars: true,
+            }),
         ],
     };
 
