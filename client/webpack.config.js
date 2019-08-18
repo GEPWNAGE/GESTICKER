@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const Dotenv = require('dotenv-webpack');
 
@@ -9,9 +9,7 @@ function baseConfig({ environment, devtool, analyze }) {
     const config = {
         context: __dirname,
 
-        entry: [
-            './src/index',
-        ],
+        entry: ['./src/index'],
 
         output: {
             path: path.resolve(__dirname, '../server/public/build'),
@@ -27,20 +25,34 @@ function baseConfig({ environment, devtool, analyze }) {
         module: {
             rules: [
                 {
+                    test: /\.scss$/,
+                    use: [
+                        environment === 'production'
+                            ? { loader: MiniCssExtractPlugin.loader }
+                            : { loader: 'style-loader' },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                importLoaders: 1,
+                            },
+                        },
+                        { loader: 'sass-loader' },
+                    ],
+                },
+
+                {
                     test: /\.tsx?$/,
                     use: [
                         {
                             loader: 'babel-loader',
                             options: {
-
                                 presets: [
                                     '@babel/preset-env',
                                     '@babel/preset-react',
                                 ],
-                                plugins: [
-                                    'react-hot-loader/babel',
-                                ],
-                            }
+                                plugins: ['react-hot-loader/babel'],
+                            },
                         },
                         {
                             loader: 'ts-loader',
@@ -62,9 +74,7 @@ function baseConfig({ environment, devtool, analyze }) {
                                     ['@babel/preset-env', { modules: false }],
                                     '@babel/preset-react',
                                 ],
-                                plugins: [
-                                    'react-hot-loader/babel',
-                                ],
+                                plugins: ['react-hot-loader/babel'],
                             },
                         },
                     ],
@@ -72,43 +82,34 @@ function baseConfig({ environment, devtool, analyze }) {
 
                 {
                     test: /\.{jpg|svg|png|gif}$/,
-                    use: [
-                        {loader: 'file-loader'},
-                    ],
+                    use: [{ loader: 'file-loader' }],
                 },
 
                 {
                     test: require.resolve('mapbox-gl/dist/mapbox-gl.css'),
-                    use: [
-                        'style-loader',
-                        'css-loader',
-                    ],
-                }
+                    use: ['style-loader', 'css-loader'],
+                },
             ],
         },
 
         plugins: [
             new ForkTsCheckerWebpackPlugin(),
 
-            new webpack.WatchIgnorePlugin([
-                /scss\.d\.ts$/,
-            ]),
+            new webpack.WatchIgnorePlugin([/scss\.d\.ts$/]),
 
             new webpack.HotModuleReplacementPlugin(),
-
-            new webpack.DefinePlugin({
-                'process.env.NODE_ENV': JSON.stringify(environment),
-            }),
 
             new Dotenv(),
         ],
     };
 
     if (analyze) {
-        config.plugins.push(new BundleAnalyzerPlugin({
-            analyzerMode: 'static',
-            openAnalyzer: false,
-        }));
+        config.plugins.push(
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static',
+                openAnalyzer: false,
+            }),
+        );
     }
 
     return config;
@@ -116,24 +117,6 @@ function baseConfig({ environment, devtool, analyze }) {
 
 function developmentConfig(config, { devServer }) {
     config.plugins.push(new webpack.NamedModulesPlugin());
-
-    // Styles
-    config.module.rules.push({
-        test: /\.scss$/,
-        use: [
-            { loader: 'style-loader' },
-            {
-                loader: 'css-loader',
-                options: {
-                    // namedExport: true,
-                    modules: true,
-                    // localIdentName: '[name]-[local]-[hash:base64:5]',
-                    importLoaders: 1,
-                },
-            },
-            { loader: 'sass-loader' },
-        ],
-    });
 
     // Dev server
     if (devServer) {
@@ -161,38 +144,13 @@ function productionConfig(config) {
     config.output.publicPath = '/build/';
 
     // Styles
-    const extractStyles = new ExtractTextPlugin({
-        filename: '[name].css',
-    });
-
-    config.module.rules.push({
-        test: /\.scss$/,
-        use: extractStyles.extract([
-            {
-                loader: 'css-loader',
-                options: {
-                    namedExport: true,
-                    modules: true,
-                    localIdentName: '[name]-[local]-[hash:base64:5]',
-                    importLoaders: 1,
-                },
-            },
-            { loader: 'sass-loader' },
-        ]),
-    });
-
-    config.plugins.push(extractStyles);
+    config.plugins.push(
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+        }),
+    );
 
     // Optimize bundle
-    config.plugins.push(new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false
-    }));
-
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-        sourceMap: config.devtool !== false,
-    }));
-
     config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
 
     return config;
@@ -204,7 +162,8 @@ function config({
     devtool = false,
     analyze = false,
 } = {}) {
-    const environmentConfig = environment === 'development' ? developmentConfig : productionConfig;
+    const environmentConfig =
+        environment === 'development' ? developmentConfig : productionConfig;
 
     const env = {
         environment,
