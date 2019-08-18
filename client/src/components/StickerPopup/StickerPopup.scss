@@ -3,9 +3,19 @@
 $sides: 'top' 'bottom' 'height', 'left' 'right' 'width', 'right' 'left' 'width',
     'bottom' 'top' 'height';
 
+$popup-max-width: 500px;
+$popup-margin: 5px;
+
 $popup-bg: white;
 $arrow-height: 8px;
 $image-margin: 3px;
+
+@mixin responsive-max-width($max-width, $spacing) {
+    max-width: $max-width;
+    @media (max-width: $max-width + 2 * $spacing) {
+        max-width: calc(100vw - #{2 * $spacing});
+    }
+}
 
 .popup {
     z-index: 10;
@@ -19,6 +29,8 @@ $image-margin: 3px;
             margin-#{$opposite-side}: $arrow-height;
         }
     }
+
+    @include responsive-max-width($popup-max-width, $popup-margin);
 }
 
 .content {
@@ -29,11 +41,15 @@ $image-margin: 3px;
 }
 
 .image {
-    max-width: 500px;
-    max-height: 500px;
+    max-height: 400px;
     margin: (-$spacing-base + $image-margin) (-$spacing-base + $image-margin)
         $spacing-base;
     border-radius: $border-radius - $image-margin + 1px;
+
+    @include responsive-max-width(
+        $popup-max-width - $image-margin * 2,
+        $popup-margin + $image-margin
+    );
 }
 
 .arrow {
