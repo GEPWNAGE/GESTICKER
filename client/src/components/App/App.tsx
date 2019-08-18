@@ -1,40 +1,27 @@
 import * as React from 'react';
-import { SFC } from 'react';
-import { Route, Switch, RouteComponentProps, withRouter } from 'react-router-dom';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { FC } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import AddSticker from '../../containers/AddSticker';
-import Map from '../../containers/Map';
-import { transitionDurationPage } from '../../styles/variables';
+import Map from '../Map/Map';
+import AddSticker from '../AddSticker/AddSticker';
 import Header from '../Header/Header';
 
 import * as styles from './App.scss';
 
-type AppProps = RouteComponentProps<{}>;
+type AppProps = {};
 
-const App: SFC<AppProps> = ({ location }) => (
+const App: FC<AppProps> = () => (
     <div className={styles.app}>
         <div className={styles.header}>
             <Header />
         </div>
-        <CSSTransitionGroup
-            transitionName={{
-                enter: styles.contentEnter,
-                enterActive: styles.contentEnterActive,
-                leave: styles.contentLeave,
-                leaveActive: styles.contentLeaveActive,
-            }}
-            transitionEnterTimeout={transitionDurationPage * 2}
-            transitionLeaveTimeout={transitionDurationPage}
-        >
-            <div className={styles.content} key={location.key}>
-                <Switch location={location}>
-                    <Route path="/add-sticker" render={() => <AddSticker />} />
-                    <Route path="/:sticker?" component={Map} />
-                </Switch>
-            </div>
-        </CSSTransitionGroup>
+        <div className={styles.content}>
+            <Switch>
+                <Route path="/add-sticker" render={() => <AddSticker />} />
+                <Route path="/:sticker?" component={Map} />
+            </Switch>
+        </div>
     </div>
 );
 
-export default withRouter<any>(App);
+export default App;

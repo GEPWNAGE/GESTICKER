@@ -1,23 +1,14 @@
-import createHistory from 'history/createBrowserHistory';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 
-import App, { AppContainerProps } from './containers/App';
-import configureStore from './redux/store';
+import App from './containers/App';
 
 import './styles/index.scss';
 
-const history = createHistory();
-const store = configureStore(history);
-
 const app = document.getElementById('app');
-function render(AppComponent: React.ComponentType<AppContainerProps>) {
-    ReactDOM.render((
-        <AppContainer>
-            <AppComponent store={store} history={history} />
-        </AppContainer>
-    ), app);
+
+function render(AppComponent: React.ElementType) {
+    ReactDOM.render(<AppComponent />, app);
 }
 
 render(App);

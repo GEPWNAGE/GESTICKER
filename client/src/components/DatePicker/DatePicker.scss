@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .input {
-    composes: input from '../Input/Input.scss';
+    composes: input from '../TextInput/TextInput.scss';
 }
 
 :global .react-datepicker {

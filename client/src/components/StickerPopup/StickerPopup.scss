@@ -1,0 +1,73 @@
+@import '../../styles/variables';
+
+$sides: 'top' 'bottom' 'height', 'left' 'right' 'width', 'right' 'left' 'width',
+    'bottom' 'top' 'height';
+
+$popup-max-width: 500px;
+$popup-margin: 5px;
+
+$popup-bg: white;
+$arrow-height: 8px;
+$image-margin: 3px;
+
+@mixin responsive-max-width($max-width, $spacing) {
+    max-width: $max-width;
+    @media (max-width: $max-width + 2 * $spacing) {
+        max-width: calc(100vw - #{2 * $spacing});
+    }
+}
+
+.popup {
+    z-index: 10;
+    background: $popup-bg;
+    border-radius: $border-radius;
+    filter: drop-shadow(0 0 1px rgba(black, 0.25))
+        drop-shadow(0 1px 5px rgba(black, 0.15));
+
+    @each $side, $opposite-side, $length in $sides {
+        &[data-placement^='#{$side}'] {
+            margin-#{$opposite-side}: $arrow-height;
+        }
+    }
+
+    @include responsive-max-width($popup-max-width, $popup-margin);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: $spacing-base;
+}
+
+.image {
+    max-height: 400px;
+    margin: (-$spacing-base + $image-margin) (-$spacing-base + $image-margin)
+        $spacing-base;
+    border-radius: $border-radius - $image-margin + 1px;
+
+    @include responsive-max-width(
+        $popup-max-width - $image-margin * 2,
+        $popup-margin + $image-margin
+    );
+}
+
+.arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: $spacing-base;
+
+    border: $arrow-height solid transparent;
+
+    @each $side, $opposite-side, $length in $sides {
+        .popup[data-placement^='#{$side}'] & {
+            #{$opposite-side}: -$arrow-height;
+            margin-#{$side}: 0;
+            margin-#{$opposite-side}: 0;
+
+            border-#{$side}-color: $popup-bg;
+            border-#{$opposite-side}-width: 0;
+        }
+    }
+}

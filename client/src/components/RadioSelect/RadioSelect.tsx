@@ -1,27 +1,36 @@
 import * as React from 'react';
-import { SFC } from 'react';
+import { SFC, InputHTMLAttributes } from 'react';
 
 import * as styles from './RadioSelect.scss';
 
-interface RadioSelectProps {
+interface RadioSelectProps extends InputHTMLAttributes<HTMLInputElement> {
     options: {
-        [value: string]: React.ReactChild;
+        [value: string]: React.ReactNode;
     };
     value: string;
-    onChange: (type: string) => void;
 }
 
-const RadioSelect: SFC<RadioSelectProps> = ({ options, value, onChange }) => (
+const RadioSelect: SFC<RadioSelectProps> = ({
+    options,
+    value,
+    ...otherOptions
+}) => (
     <div className={styles.select}>
         {Object.keys(options).map((optionValue) => (
-            <div
+            <label
                 key={optionValue}
-                className={value === optionValue ? styles.optionChecked : styles.option}
-                onClick={() => onChange(optionValue)}
+                className={
+                    value === optionValue ? styles.optionChecked : styles.option
+                }
             >
-                <div className={value === optionValue ? styles.iconChecked : styles.icon} />
+                <div
+                    className={
+                        value === optionValue ? styles.iconChecked : styles.icon
+                    }
+                />
                 {options[optionValue]}
-            </div>
+                <input type="radio" value={optionValue} {...otherOptions} className={styles.input} />
+            </label>
         ))}
     </div>
 );

@@ -1,24 +1,16 @@
-import { History } from 'history';
 import * as React from 'react';
-import { SFC } from 'react';
-import { Provider as ReduxProvider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import { Store } from 'redux';
+import { Router } from 'react-router-dom';
+import { hot } from 'react-hot-loader/root';
 
 import App from '../components/App/App';
-import { State } from '../redux/reducers';
+import history from '../history';
 
-export interface AppContainerProps {
-    store: Store<State>;
-    history: History;
+function AppContainer() {
+    return (
+        <Router history={history}>
+            <App />
+        </Router>
+    );
 }
 
-const AppContainer: SFC<AppContainerProps> = ({ store, history }) => (
-    <ReduxProvider store={store}>
-        <ConnectedRouter store={store} history={history}>
-            <App />
-        </ConnectedRouter>
-    </ReduxProvider>
-);
-
-export default AppContainer;
+export default hot(AppContainer);

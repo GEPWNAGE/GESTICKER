@@ -1,4 +1,4 @@
-import { Coords } from 'google-map-react';
+export type Coords = [number, number];
 
 export interface Sticker {
     id: number;
