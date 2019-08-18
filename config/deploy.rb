@@ -30,3 +30,7 @@ end
 
 after 'deploy:updated', 'composer'
 after 'deploy:updated', 'yarn'
+
+namespace :deploy do
+  after :starting, 'composer:install_executable'
+end
