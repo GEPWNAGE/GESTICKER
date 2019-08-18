@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { FC } from 'react';
+import { Marker } from 'react-mapbox-gl';
 
 import { Sticker, Coords } from '../../types';
 
 import * as styles from './StickerMarker.scss';
-import { Marker } from 'react-mapbox-gl';
 
 type StickerMarkerProps = {
     sticker?: Sticker;

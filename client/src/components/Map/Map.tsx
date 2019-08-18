@@ -1,7 +1,7 @@
 import * as MapboxGl from 'mapbox-gl';
 import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import ReactMapboxFactory, { Marker } from 'react-mapbox-gl';
+import ReactMapboxFactory, { Marker, Cluster } from 'react-mapbox-gl';
 import { Manager, Reference, Popper } from 'react-popper';
 import { RouteComponentProps } from 'react-router';
 
@@ -9,6 +9,7 @@ import history from '../../history';
 import { Sticker, Coords } from '../../types';
 import StickerPopup from '../StickerPopup/StickerPopup';
 import StickerMarker from '../StickerMarker/StickerMarker';
+import ClusterMarker from '../ClusterMarker/ClusterMarker';
 
 import * as styles from './Map.scss';
 
@@ -18,6 +19,10 @@ const Mapbox = ReactMapboxFactory({
 
 const defaultCenter: Coords = [5.4877141, 51.4473811];
 const defaultZoom = 14;
+
+function clusterMarkerFactory(coords: Coords, pointCount: number) {
+    return <ClusterMarker coordinates={coords} pointCount={pointCount} />;
+}
 
 type MapProps = RouteComponentProps<{ sticker: string }> & {
     stickers: Sticker[];
@@ -109,20 +114,26 @@ export default function Map({ match }: MapProps) {
                     }}
                 >
                     <>
-                        {stickers
-                            .filter((sticker) => sticker !== activeSticker)
-                            .map((sticker) => (
-                                <StickerMarker
-                                    key={sticker.id}
-                                    coordinates={sticker.coords}
-                                    sticker={sticker}
-                                    onClick={(e) => {
-                                        // Transition to the clicked sticker
-                                        setMovingMethod('flyTo');
-                                        history.push(`/${sticker.id}`);
-                                    }}
-                                />
-                            ))}
+                        <Cluster
+                            ClusterMarkerFactory={clusterMarkerFactory}
+                            zoomOnClick
+                            zoomOnClickPadding={50}
+                        >
+                            {stickers
+                                .filter((sticker) => sticker !== activeSticker)
+                                .map((sticker) => (
+                                    <StickerMarker
+                                        key={sticker.id}
+                                        coordinates={sticker.coords}
+                                        sticker={sticker}
+                                        onClick={(e) => {
+                                            // Transition to the clicked sticker
+                                            setMovingMethod('flyTo');
+                                            history.push(`/${sticker.id}`);
+                                        }}
+                                    />
+                                ))}
+                        </Cluster>
                         {activeSticker && (
                             <Marker coordinates={activeSticker.coords}>
                                 <Reference>
