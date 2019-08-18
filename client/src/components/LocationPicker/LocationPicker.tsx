@@ -24,7 +24,7 @@ const LocationPicker: FC<LocationPickerProps> = ({ coords, onChange }) => {
     return (
         <div className={styles.wrapper}>
             <Mapbox
-                style="mapbox://styles/mapbox/streets-v9"
+                style="mapbox://styles/mapbox/streets-v11"
                 containerStyle={{ width: '100%', height: '100%' }}
                 center={coords || defaultCenter}
                 onClick={(map, e: any) => {
