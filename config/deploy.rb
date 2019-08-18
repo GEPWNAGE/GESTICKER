@@ -16,6 +16,9 @@ append :linked_files, 'server/.env'
 append :linked_dirs, 'server/data'
 append :linked_dirs, 'server/public/uploads'
 
+Rake::Task['deploy:updated'].prerequisites.delete('composer:install')
+SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
+
 task :sticker_server do
   on roles(:web) do
     execute "cd #{release_path}/server && composer install"
