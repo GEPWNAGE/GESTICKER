@@ -4,7 +4,7 @@
     padding: 10px 15px;
 
     font: inherit;
-    border: 2px solid rgba($color-text, 0.1);
+    border: 2px solid rgba($color-text, 0.3);
     border-radius: $border-radius;
 
     transition:
@@ -12,7 +12,7 @@
         box-shadow $transition-duration ease;
 
     &:hover {
-        border-color: rgba($color-text, 0.2);
+        border-color: rgba($color-text, 0.4);
     }
 
     &:focus {

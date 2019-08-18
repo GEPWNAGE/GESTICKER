@@ -1,7 +1,10 @@
 @import '../../styles/variables';
 
 .input {
-    display: none;
+    width: 0;
+    height: 0;
+    margin: 0;
+    opacity: 0;
 }
 
 .select {
