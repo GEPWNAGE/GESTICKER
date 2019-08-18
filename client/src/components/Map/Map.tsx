@@ -57,7 +57,12 @@ export default function Map({ match }: MapProps) {
         async function fetchStickers() {
             const response = await fetch('/api/stickers');
             const result = await response.json();
-            setStickers(result.stickers);
+            setStickers(
+                result.stickers.map((sticker: any) => ({
+                    ...sticker,
+                    date: new Date(sticker.date),
+                })),
+            );
         }
 
         fetchStickers();
@@ -125,6 +130,7 @@ export default function Map({ match }: MapProps) {
                             <StickerPopup
                                 ref={popupRef}
                                 popperRef={ref}
+                                sticker={activeSticker}
                                 {...otherProps}
                             />
                         )}
