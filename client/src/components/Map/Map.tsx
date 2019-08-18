@@ -95,7 +95,7 @@ export default function Map({ match }: MapProps) {
             <Manager>
                 <Mapbox
                     style="mapbox://styles/mapbox/streets-v11"
-                    containerStyle={{ width: '100%', height: '100%' }}
+                    containerStyle={{ flex: 'auto' }}
                     onStyleLoad={(map) => (mapRef.current = map)}
                     renderChildrenInPortal
                     movingMethod={movingMethod}
