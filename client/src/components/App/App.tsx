@@ -2,8 +2,8 @@ import * as React from 'react';
 import { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import AddSticker from '../../containers/AddSticker';
 import Map from '../../containers/Map';
+import AddSticker from '../AddSticker/AddSticker';
 import Header from '../Header/Header';
 
 import * as styles from './App.scss';

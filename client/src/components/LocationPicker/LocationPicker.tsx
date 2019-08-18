@@ -26,10 +26,11 @@ const LocationPicker: FC<LocationPickerProps> = ({ coords, onChange }) => {
             <Mapbox
                 style="mapbox://styles/mapbox/streets-v9"
                 containerStyle={{ width: '100%', height: '100%' }}
-                center={defaultCenter}
+                center={coords || defaultCenter}
                 onClick={(map, e: any) => {
                     onChange([e.lngLat.lng, e.lngLat.lat]);
                 }}
+                renderChildrenInPortal
             >
                 {coords && <StickerMarker coordinates={coords} />}
             </Mapbox>
