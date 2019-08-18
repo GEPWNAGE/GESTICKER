@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Map from '../../containers/Map';
+import Map from '../Map/Map';
 import AddSticker from '../AddSticker/AddSticker';
 import Header from '../Header/Header';
 
