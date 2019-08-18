@@ -140,14 +140,12 @@ function AddStickerForm(props: FormikProps<FormValues>) {
                 <FormRow
                     name="author"
                     label="Photo author"
-                    optional
                     disabled={!values.image}
                     renderInput={({ field }) => <TextInput {...field} />}
                 />
                 <FormRow
                     name="date"
                     label="Photo date"
-                    optional
                     disabled={!values.image}
                     renderInput={({ field }) => (
                         <DatePicker
