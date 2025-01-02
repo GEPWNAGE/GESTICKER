@@ -30,17 +30,17 @@ class Config {
             ],
 
             'database' => [
-                'driver' => getenv('database_driver'),
-                'user' => getenv('database_user'),
-                'password' => getenv('database_password'),
-                'dbname' => getenv('database_database'),
-                'host' => getenv('database_host'),
-                'port' => getenv('database_port'),
-                'path' => self::fixPath(getenv('database_path')),
+                'driver' => getenv('DATABASE_DRIVER'),
+                'user' => getenv('DATABASE_USER'),
+                'password' => getenv('DATABASE_PASSWORD'),
+                'dbname' => getenv('DATABASE_DATABASE'),
+                'host' => getenv('DATABASE_HOST'),
+                'port' => getenv('DATABASE_PORT'),
+                'path' => self::fixPath(getenv('DATABASE_PATH')),
             ],
 
             'uploads' => [
-                'path' => self::fixPath(getenv('uploads_path')),
+                'path' => self::fixPath(getenv('UPLOADS_PATH')),
             ],
         ];
     }

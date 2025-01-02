@@ -1,0 +1,38 @@
+services:
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: gesticker
+      MYSQL_USER: gesticker
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./db_data:/var/lib/mysql
+    ports:
+      - "23306:3306"
+  app:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    environment:
+      DATABASE_DRIVER: pdo_mysql
+      DATABASE_USER: gesticker
+      DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      DATABASE_DATABASE: gesticker
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      UPLOADS_PATH: /app/server/public/uploads
+    depends_on:
+      - db
+    volumes:
+      - ./server/public/uploads:/app/server/public/uploads
+  web:
+    build:
+      context: .
+      dockerfile: web.Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+    volumes:
+      - ./server/public/uploads:/app/server/public/uploads

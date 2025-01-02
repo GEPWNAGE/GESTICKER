@@ -1,2 +1,4 @@
 /log/
 /.idea/
+/db_data
+.env

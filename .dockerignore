@@ -1,0 +1,5 @@
+db_data
+*.Dockerfile
+client/node_modules
+server/vendor
+server/public/uploads
